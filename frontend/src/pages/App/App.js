@@ -18,5 +18,6 @@ export default function App() {
     // <div className="App">
     //   My React + Django App
     // </div>
+    
   );
 }
