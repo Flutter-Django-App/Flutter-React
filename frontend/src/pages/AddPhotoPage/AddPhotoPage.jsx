@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
-import DjangoCSRFToken from 'django-react-csrftoken'
-
 
 export default function AddPhotoPage() {
   const [formData, setFormData] = useState({
