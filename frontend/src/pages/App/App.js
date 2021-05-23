@@ -39,9 +39,9 @@ class App extends Component {
     this.state = {
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: localStorage.getItem('token').username,
-      user: '',
-      setUser: '',
+      username: localStorage.getItem('token') ? localStorage.getItem('token').username : " ",
+      // user: '',
+      // setUser: '',
     };
     // console.log(user)
   }
@@ -133,6 +133,11 @@ class App extends Component {
       default:
         form = null;
     }
+
+    console.log(localStorage.getItem('token'))
+    console.log(this.state.username)
+    console.log(this.state.logged_in)
+    console.log(this.state)
 
     return (
       <Router>
