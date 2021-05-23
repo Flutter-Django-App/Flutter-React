@@ -1,10 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import {Navbar, Nav} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 import "./NavBar.css";
 
 export default function NavBar() {
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        async function fetchUser() {
+          const { data } = await axios.get("/profile/");
+          setUser(data);
+        }
+        fetchUser();
+      }, []);
 
 	// function handleLogOut() {
 	// 	// Delegate to the users-service
@@ -14,16 +24,37 @@ export default function NavBar() {
 	// }
 
 	return (
-		<nav className="ConversationList">
-			<Link to='/photos' >Feed</Link>
-			&nbsp; | &nbsp;
-			<Link to='/addphoto' >Add Photo</Link>
-			&nbsp; | &nbsp;
-			<Link to='/profile' >Profile</Link>
-			&nbsp; | &nbsp;
-			<Link to=''  >
-				Log Out
-			</Link>
-		</nav>
+        <header>
+        <Navbar bg="dark" variant='dark' expand='lg' collapseOnSelect>
+            {/* <Container> */}
+                <LinkContainer to="/">
+                        <Navbar.Brand>Flutter Home</Navbar.Brand>
+                </LinkContainer>
+                {/* <Navbar.Toggle aria-controls='basic-navbar-nav' /> */}
+                <Navbar id='basic-navbar-nav'>
+                    <Nav className="mr-auto">
+                            <LinkContainer to='/photos'>
+                                <Nav.Link>
+                                    Photo Feed
+                                </Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to='/photos/create'>
+                                <Nav.Link>
+                                    Add a Photo
+                                </Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to='/profile'>
+                                <Nav.Link>
+                                    Profile
+                                </Nav.Link>
+                            </LinkContainer>
+                    </Nav>
+                </Navbar>
+            {/* </Container> */}
+        </Navbar>
+    </header>
 	);
 }
+
+
+
