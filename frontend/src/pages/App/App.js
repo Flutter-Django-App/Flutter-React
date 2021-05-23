@@ -5,6 +5,7 @@ import "./App.css";
 import HomePage from "../../pages/HomePage/HomePage";
 import IndexPage from "../../pages/IndexPage/IndexPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
+import EditProfilePage from "../../pages/EditProfilePage/EditProfilePage";
 import AddPhotoPage from "../../pages/AddPhotoPage/AddPhotoPage";
 import NavBar from '../../components/NavBar/NavBar.jsx';
 import LoginForm from '../../components/LoginForm/LoginForm';
@@ -150,8 +151,9 @@ class App extends Component {
         <Container>
           <Route path="/" component={HomePage} exact />
           <Route path="/photos" component={IndexPage} exact />
+          <Route path='/photos/create' component={AddPhotoPage} />
           <Route path="/profile" component={UserProfilePage} exact />
-          <Route path="/addphoto" component={AddPhotoPage} exact />
+          <Route path="/profile/update" component={EditProfilePage} exact />
         </Container>
       </main>
       </Router>
