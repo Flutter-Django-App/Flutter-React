@@ -5,10 +5,11 @@ import { Form, Button } from "react-bootstrap";
 
 export default function AddPhotoPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    breed: "",
-    description: "",
-    age: 0,
+    caption: "",
+    location: "",
+    url: "",
+    total_likes: 0,
+    total_comments: 0,
   });
   const history = useHistory();
 

@@ -5,7 +5,6 @@ import "./EditProfilePage.css";
 import { Form, Button } from "react-bootstrap";
 
 export default function EditProfilePage({ user }) {
-    console.log(user)
   const location = useLocation();
 
   const [invalidForm, setValidForm] = useState(true);
