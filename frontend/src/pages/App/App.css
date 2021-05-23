@@ -1,5 +1,11 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  margin-left: 20px;
+}
+
+input {
+  display: block;
+  margin: 5px 0 5px;
 }
 
 .App-logo {
