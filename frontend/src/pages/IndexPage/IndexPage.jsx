@@ -7,7 +7,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     async function fetchPhotos() {
-      const { data } = await axios.get("/photos/");
+      const { data } = await axios.get("photos/");
       setPhotos(data);
     }
     fetchPhotos();
@@ -16,7 +16,7 @@ export default function IndexPage() {
   console.log(photos);
 
   return (
-    <div>
+    <div class="col align-self-center">
       <h1>Photos Index Page</h1>
       <Row>
         {photos.map((photo) => (
