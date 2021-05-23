@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Row, Col, Card } from "react-bootstrap";
 
+
 export default function IndexPage() {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
     async function fetchPhotos() {
-      const { data } = await axios.get("/photos/");
+      const { data } = await axios.get("photos/");
       setPhotos(data);
     }
     fetchPhotos();
@@ -16,7 +17,7 @@ export default function IndexPage() {
   console.log(photos);
 
   return (
-    <div>
+    <div class="col align-self-center">
       <h1>Photos Index Page</h1>
       <Row>
         {photos.map((photo) => (
