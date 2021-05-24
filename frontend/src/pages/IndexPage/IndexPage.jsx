@@ -80,6 +80,7 @@ export default function IndexPage() {
                   <strong>{photo.user}</strong>
                 </Card.Title>
                 <Card.Text as="div">
+                  <img src={photo.url} />
                   <div className="my-3">{photo.location}</div>
                 </Card.Text>
                 <Card.Text as="div">
@@ -87,6 +88,7 @@ export default function IndexPage() {
                     <strong>Img URL: </strong>
                     {photo.url}
                   </div>
+
                 </Card.Text>
                 <Card.Text as="div">
                   <div className="my-3">

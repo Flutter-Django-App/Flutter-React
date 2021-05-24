@@ -29,7 +29,9 @@ function Navb(props) {
 							Feed
 						</Nav.Link>
 					</LinkContainer>
-					<LinkContainer to="/photos/create">
+
+					<LinkContainer to="/photos/create" >
+
 						<Nav.Link>
 							Add Photo
 						</Nav.Link>

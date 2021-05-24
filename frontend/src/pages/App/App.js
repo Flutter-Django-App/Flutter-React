@@ -80,6 +80,42 @@ export default function App() {
   console.log(user);
   // console.log(logged_in);
 
+
+//     console.log(localStorage.getItem('token'))
+//     console.log(this.state.username)
+//     console.log(this.state.logged_in)
+//     console.log(this.state)
+
+//     return (
+//       <Router>
+//       <main className="App">
+//         <NavBar
+//           logged_in={this.state.logged_in}
+//           display_form={this.display_form}
+//           handle_logout={this.handle_logout}
+//         />
+//         {form}
+//         <h3>
+//           {this.state.logged_in ? (
+//             <>
+//               <div>Hello, {this.state.username}</div>
+//               <Container>
+//                 <Route path="/" component={HomePage} exact />
+//                 <Route path="/photos" component={IndexPage} exact />
+//                 <Route path='/photos/create' component={AddPhotoPage} />
+//                 <Route path="/profile" component={UserProfilePage} exact />
+//                 <Route path="/profile/update" component={EditProfilePage} exact />
+//               </Container>
+//               </>
+//           ) : (
+//             <div>Please Log In</div>
+//             )}
+//         </h3>
+//       </main>
+// </Router>
+//     );
+//   }
+
   return (
     <Router>
       <NavBar2 logged_in={logged_in} handle_logout={handle_logout} />
@@ -109,125 +145,3 @@ export default function App() {
     </Router>
   );
 }
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       displayed_form: '',
-//       logged_in: localStorage.getItem('token') ? true : false,
-//       username: localStorage.getItem('token') ? localStorage.getItem('token').username : " ",
-//     };
-//   }
-
-//   componentDidMount() {
-//     if (this.state.logged_in) {
-//       fetch('http://localhost:8000/current_user/', {
-//         headers: {
-//           Authorization: `JWT ${localStorage.getItem('token')}`
-//         }
-//       })
-//         .then(res => res.json())
-//         .then(json => {
-//           this.setState({ username: json.username });
-//         });
-//     }
-//   }
-
-//   handle_login = (e, data) => {
-//     e.preventDefault();
-//     fetch('http://localhost:8000/token-auth/', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(data)
-//     })
-//       .then(res => res.json())
-//       .then(json => {
-//         localStorage.setItem('token', json.token);
-//         this.setState({
-//           logged_in: true,
-//           displayed_form: '',
-//           username: json.user.username
-//         });
-//       });
-//   };
-
-//   handle_signup = (e, data) => {
-//     e.preventDefault();
-//     fetch('http://localhost:8000/users/', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(data)
-//     })
-//       .then(res => res.json())
-//       .then(json => {
-//         localStorage.setItem('token', json.token);
-//         this.setState({
-//           logged_in: true,
-//           displayed_form: '',
-//           username: json.username
-//         });
-//       });
-//   };
-
-//   handle_logout = () => {
-//     localStorage.removeItem('token');
-//     this.setState({ logged_in: false, username: '' });
-//   };
-
-//   display_form = form => {
-//     this.setState({
-//       displayed_form: form
-//     });
-//   };
-
-//   render() {
-//     let form;
-//     switch (this.state.displayed_form) {
-//       case 'login':
-//         form = <LoginForm handle_login={this.handle_login} />;
-//         break;
-//       case 'signup':
-//         form = <SignupForm handle_signup={this.handle_signup} />;
-//         break;
-//       default:
-//         form = null;
-//     }
-
-//     console.log(localStorage.getItem('token'))
-//     console.log(this.state.username)
-//     console.log(this.state.logged_in)
-//     console.log(this.state)
-
-//     return (
-//       <Router>
-//       <main className="App">
-//         <NavBar
-//           logged_in={this.state.logged_in}
-//           display_form={this.display_form}
-//           handle_logout={this.handle_logout}
-//         />
-//         {form}
-//         <h3>
-//           {this.state.logged_in
-//             ? `Hello, ${this.state.username}`
-//             : 'Please Log In'}
-//         </h3>
-//         <Container>
-//           <Route path="/" component={HomePage} exact />
-//           <Route path="/photos" component={IndexPage} exact />
-//           <Route path='/photos/create' component={AddPhotoPage} />
-//           <Route path="/profile" component={UserProfilePage} exact />
-//           <Route path="/profile/update" component={EditProfilePage} exact />
-//         </Container>
-//       </main>
-//       </Router>
-//     );
-//   }
-// }
-
-// export default App;
