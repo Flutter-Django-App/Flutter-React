@@ -81,9 +81,7 @@ export default function UserProfilePage({user}) {
       <Row>
         {photos.map((photo) => (
           <CardColumns>
-            {console.log(allUsers[photo.user - 1].username)}
-
-            {allUsers[photo.user - 1].username === user.username ? (
+            {photo.user === user.id ? (
             <Card className="my-3 p-3 rounded">
               <Card.Body as="div">
                 <Card.Title as="div">
