@@ -47,7 +47,7 @@ export default function EditProfilePage({ user }) {
           <div className="BcMHM EzUlV XfvCs">
             <ul className="wW1cu">
               <li>
-                <a className="h-aRd -HRM- " href="profile/update" tabIndex="0">
+                <a className="h-aRd -HRM- " href="update" tabIndex="0">
                   Edit Profile
                 </a>
               </li>
