@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Row, Col, Card, CardGroup } from "react-bootstrap";
+import { Row, Col, Card, CardGroup, CardColumns } from "react-bootstrap";
 
 export default function IndexPage() {
   const [user, setUser] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
+  
 
   useEffect(() => {
     async function fetchUser() {
@@ -16,6 +18,14 @@ export default function IndexPage() {
   }, []);
 
   useEffect(() => {
+    async function fetchAllUsers() {
+      const { data } = await axios.get("/allusers/");
+      setAllUsers(data);
+    }
+    fetchAllUsers();
+  }, []);
+
+  useEffect(() => {
     async function fetchPhotos() {
       const { data } = await axios.get("/photos/");
       setPhotos(data);
@@ -23,7 +33,14 @@ export default function IndexPage() {
     fetchPhotos();
   }, []);
 
+  console.log(photos)
   console.log(user);
+  console.log(allUsers)
+
+  // users.map((user) => (
+
+  //   )
+  // )
 
   return (
     <div>
@@ -63,7 +80,10 @@ export default function IndexPage() {
 
       <Row>
         {photos.map((photo) => (
-          <Col key={photo.id} sm={12} md={6} lg={4} xl={3}>
+          <CardColumns>
+            {console.log(allUsers[photo.user - 1].username)}
+
+            {allUsers[photo.user - 1].username === user.username ? (
             <Card className="my-3 p-3 rounded">
               <Card.Body as="div">
                 <Card.Title as="div">
@@ -89,9 +109,13 @@ export default function IndexPage() {
                 </Card.Text>
               </Card.Body>
             </Card>
-          </Col>
+         
+         ) : (
+           console.log('bye'))
+          }
+          </CardColumns>
         ))}
-      </Row>
+        </Row>
     </div>
   );
 }

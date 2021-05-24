@@ -75,10 +75,10 @@ export default function App() {
     setUsername("");
   };
 
-  console.log(localStorage.getItem("token"));
-  console.log(username);
+  // console.log(localStorage.getItem("token"));
+  // console.log(username);
   console.log(user);
-  console.log(logged_in);
+  // console.log(logged_in);
 
   return (
     <Router>

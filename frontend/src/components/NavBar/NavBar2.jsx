@@ -27,8 +27,8 @@ export default function NavBar2({ logged_in, handle_logout }) {
                     <Nav.Link>My Profile</Nav.Link>
                   </LinkContainer>
                   <LinkContainer to="/login">
-                    <Nav.Link>
-                      <h7 onClick={handle_logout}>Log Out</h7>
+                    <Nav.Link onClick={handle_logout}>
+                      Log Out
                     </Nav.Link>
                   </LinkContainer>
                 </Nav>
