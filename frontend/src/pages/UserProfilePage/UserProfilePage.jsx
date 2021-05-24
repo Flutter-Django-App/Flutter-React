@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Row, Col, Card, CardGroup, CardColumns } from "react-bootstrap";
 
-export default function IndexPage() {
-  const [user, setUser] = useState([]);
+
+export default function UserProfilePage({user}) {
   const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   
 
-  useEffect(() => {
-    async function fetchUser() {
-      const { data } = await axios.get("/profile/");
-      setUser(data);
-    }
-    fetchUser();
-  }, []);
+//   useEffect(() => {
+//     async function fetchUser() {
+//       const { data } = await axios.get("/profile/");
+//       setUser(data);
+//     }
+//     fetchUser();
+//   }, []);
 
   useEffect(() => {
     async function fetchAllUsers() {
