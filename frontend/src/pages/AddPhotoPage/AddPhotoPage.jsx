@@ -63,24 +63,6 @@ export default function AddPhotoPage() {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Total Likes:</Form.Label>
-          <Form.Control
-            type="int"
-            placeholder="Enter a number"
-            name="url"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Total Comments:</Form.Label>
-          <Form.Control
-            type="int"
-            placeholder="Enter a number"
-            name="url"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
           <Button type="submit" onChange={handleChange}>Add Photo</Button>
         </Form.Group>
       </Form>
