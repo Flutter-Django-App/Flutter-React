@@ -57,8 +57,7 @@ export default function AddPhotoPage() {
         <Form.Group>
           <Form.Label>Upload Image:</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter the image url"
+            type="file"
             name="url"
             onChange={handleChange}
           />
@@ -82,7 +81,7 @@ export default function AddPhotoPage() {
           />
         </Form.Group>
         <Form.Group>
-          <Button type="submit">Add Photo</Button>
+          <Button type="submit" onChange={handleChange}>Add Photo</Button>
         </Form.Group>
       </Form>
     </div>

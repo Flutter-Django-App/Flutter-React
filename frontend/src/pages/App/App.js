@@ -149,19 +149,23 @@ class App extends Component {
         />
         {form}
         <h3>
-          {this.state.logged_in
-            ? `Hello, ${this.state.username}`
-            : 'Please Log In'}
+          {this.state.logged_in ? (
+            <>
+              <div>Hello, {this.state.username}</div>
+              <Container>
+                <Route path="/" component={HomePage} exact />
+                <Route path="/photos" component={IndexPage} exact />
+                <Route path='/photos/create' component={AddPhotoPage} />
+                <Route path="/profile" component={UserProfilePage} exact />
+                <Route path="/profile/update" component={EditProfilePage} exact />
+              </Container>
+              </>
+          ) : (
+            <div>Please Log In</div>
+            )}
         </h3>
-        <Container>
-          <Route path="/" component={HomePage} exact />
-          <Route path="/photos" component={IndexPage} exact />
-          <Route path='/photos/create' component={AddPhotoPage} />
-          <Route path="/profile" component={UserProfilePage} exact />
-          <Route path="/profile/update" component={EditProfilePage} exact />
-        </Container>
       </main>
-      </Router>
+</Router>
     );
   }
 }

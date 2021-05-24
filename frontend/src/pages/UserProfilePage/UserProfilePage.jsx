@@ -70,10 +70,7 @@ export default function IndexPage() {
                   <strong>{photo.user}</strong>
                 </Card.Title>
                 <Card.Text as="div">
-                  <div className="my-3">
-                    <strong>Img URL: </strong>
-                    {photo.url}
-                  </div>
+                  <img className="my-3" src={photo.url} />
                 </Card.Text>
                 <Card.Text as="div">
                   <div className="my-3">{photo.location}</div>
