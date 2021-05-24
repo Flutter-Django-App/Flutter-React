@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './LoginForm.css'
 
 class LoginForm extends React.Component {
   state = {
@@ -19,8 +20,14 @@ class LoginForm extends React.Component {
 
   render() {
     return (
+      <article className="art">
+        <div className="login-div log-div">
+          <div className="login-div-2">
+          </div>
+        </div>
+      <div className="gr27e">
+        <img src="flutter-logo.png" width='280px' height='90px' />
       <form onSubmit={e => this.props.handle_login(e, this.state)}>
-        <h4>Log In</h4>
         <label htmlFor="username">Username</label>
         <input
           type="text"
@@ -37,6 +44,13 @@ class LoginForm extends React.Component {
         />
         <input type="submit" />
       </form>
+      </div>
+      <div className="gr27e">
+        <div className="bot-div log-bot bottom-div bottom-log sign-bot">
+        <p className="bot-p">Don't have an account? <a href="/signup/">Sign Up</a></p>
+        </div>
+      </div>
+      </article>
     );
   }
 }
