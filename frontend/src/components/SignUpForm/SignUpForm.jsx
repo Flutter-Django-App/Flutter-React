@@ -25,6 +25,27 @@ class SignupForm extends React.Component {
         <div className="signup-div">
           <form className="sign-form" onSubmit={e => this.props.handle_signup(e, this.state)}>
             <h2 className="sign-sub">Sign up to see photos and videos from your friends.</h2>
+            <label htmlFor="username">First Name</label>
+            <input
+              type="text"
+              name="first_name"
+              value={this.state.first_name}
+              onChange={this.handle_change}
+            />
+            <label htmlFor="username">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              value={this.state.last_name}
+              onChange={this.handle_change}
+            />
+            <label htmlFor="username">email</label>
+            <input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.handle_change}
+            />
             <label htmlFor="username">Username</label>
             <input
               type="text"
