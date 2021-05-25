@@ -29,7 +29,6 @@ export default function App() {
   const [user, setUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
-
   useEffect(() => {
     async function fetchUser() {
       const { data } = await axios.get("/profile/");
@@ -37,7 +36,7 @@ export default function App() {
     }
     fetchUser();
   }, []);
-
+  
   useEffect(() => {
     async function fetchAllUsers() {
       const { data } = await axios.get("/allusers/");
@@ -47,25 +46,34 @@ export default function App() {
     fetchAllUsers();
   }, [allUsers]);
 
-  const handle_login = (e, data) => {
+  const handle_login = async (e, formData) => {
     e.preventDefault();
-    fetch("http://localhost:8000/token-auth/", {
+
+    const options = {
+      url: "http://localhost:8000/token-auth/",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        localStorage.setItem("token", json.token);
-        setLoggedIn(true);
-        setUsername(json.user.username);
-        setUserId(json.user.id);
-        setUser(json.user);
-        window.location.href = "/photos";
-      });
+      data: {
+        username: formData.username,
+        password: formData.password,
+      },
+    };
+
+    const response = await axios(options);
+    const token = response.data.token;
+    const user = response.data.user;
+
+    localStorage.setItem("token", token);
+    
+    if (localStorage.getItem("token")) {
+      setUsername(user.username); // might be redundant
+      setUser(user);
+      setLoggedIn(true);
+    }
   };
+
 
   const handle_signup = (e, data) => {
     e.preventDefault();
@@ -87,6 +95,7 @@ export default function App() {
       });
   };
 
+  
   const handle_logout = () => {
     localStorage.removeItem("token");
     setLoggedIn(false);
@@ -95,45 +104,44 @@ export default function App() {
 
   // console.log(localStorage.getItem("token"));
   // console.log(username);
-  console.log(user);
-  console.log(user.id)
+
+  // console.log(user);
   // console.log(logged_in);
 
+  //     console.log(localStorage.getItem('token'))
+  //     console.log(this.state.username)
+  //     console.log(this.state.logged_in)
+  //     console.log(this.state)
 
-//     console.log(localStorage.getItem('token'))
-//     console.log(this.state.username)
-//     console.log(this.state.logged_in)
-//     console.log(this.state)
-
-//     return (
-//       <Router>
-//       <main className="App">
-//         <NavBar
-//           logged_in={this.state.logged_in}
-//           display_form={this.display_form}
-//           handle_logout={this.handle_logout}
-//         />
-//         {form}
-//         <h3>
-//           {this.state.logged_in ? (
-//             <>
-//               <div>Hello, {this.state.username}</div>
-//               <Container>
-//                 <Route path="/" component={HomePage} exact />
-//                 <Route path="/photos" component={IndexPage} exact />
-//                 <Route path='/photos/create' component={AddPhotoPage} />
-//                 <Route path="/profile" component={UserProfilePage} exact />
-//                 <Route path="/profile/update" component={EditProfilePage} exact />
-//               </Container>
-//               </>
-//           ) : (
-//             <div>Please Log In</div>
-//             )}
-//         </h3>
-//       </main>
-// </Router>
-//     );
-//   }
+  //     return (
+  //       <Router>
+  //       <main className="App">
+  //         <NavBar
+  //           logged_in={this.state.logged_in}
+  //           display_form={this.display_form}
+  //           handle_logout={this.handle_logout}
+  //         />
+  //         {form}
+  //         <h3>
+  //           {this.state.logged_in ? (
+  //             <>
+  //               <div>Hello, {this.state.username}</div>
+  //               <Container>
+  //                 <Route path="/" component={HomePage} exact />
+  //                 <Route path="/photos" component={IndexPage} exact />
+  //                 <Route path='/photos/create' component={AddPhotoPage} />
+  //                 <Route path="/profile" component={UserProfilePage} exact />
+  //                 <Route path="/profile/update" component={EditProfilePage} exact />
+  //               </Container>
+  //               </>
+  //           ) : (
+  //             <div>Please Log In</div>
+  //             )}
+  //         </h3>
+  //       </main>
+  // </Router>
+  //     );
+  //   }
 
   return (
     <Router>
