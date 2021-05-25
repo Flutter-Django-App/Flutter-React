@@ -55,10 +55,10 @@ export default function App() {
     const user = response.data.user;
 
     localStorage.setItem("token", token);
-    setUsername(user.username);
-    setUser(user);
-
+    
     if (localStorage.getItem("token")) {
+      setUsername(user.username); // might be redundant
+      setUser(user);
       setLoggedIn(true);
     }
   };
