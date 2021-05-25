@@ -67,6 +67,7 @@ export default function App() {
         setLoggedIn(true);
         setUsername(json.username);
         setUser(json.user);
+        window.location.href = "/photos";
       });
   };
 

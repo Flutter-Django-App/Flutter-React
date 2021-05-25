@@ -22,12 +22,8 @@ class LoginForm extends React.Component {
   render() {
     return (
       <article className="art">
-        <div className="login-div log-div">
-          <div className="login-div-2">
-          </div>
-        </div>
       <div className="gr27e">
-        <img src="flutter-logo.png" width='280px' height='90px' />
+        <img src="https://i.imgur.com/bfjUjgq.png" height='90px' width='280px' /> 
       <form onSubmit={e => this.props.handle_login(e, this.state)}  >
         <label htmlFor="username">Username</label>
         <input
