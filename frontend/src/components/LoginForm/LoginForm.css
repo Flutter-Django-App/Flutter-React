@@ -19,6 +19,13 @@ img {
    vertical-align: baseline; 
 }
 
+p {
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
 .art {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -39,7 +46,7 @@ img {
     background-image: url("https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png");
 } */
 
-/* .login-div {
+.login-div {
     align-self: center;
     background-position: 0 0;
     background-size: 454px 618px;
@@ -47,7 +54,7 @@ img {
     height: 618px;
     margin-left: -35px;
     margin-right: -15px;
-} */
+}
 
 /* @media (max-width: 875px);
 .log-div {
@@ -93,5 +100,34 @@ img {
     color: rgba(var(--i1d,38,38,38),1);
     font-size: 14px;
     margin: 15px;
+    text-align: center;
+}
+
+.signup-div {
+    margin-bottom: 20px;
+}
+
+.sign-form {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    max-width: 350px;
+}
+
+.sign-sub{ 
+color: rgba(var(--f52,142,142,142),1);
+font-size: 12px;
+font-weight: 600;
+line-height: 20px;
+margin: 0 40px 10px;
+text-align: center;
+}
+
+.sign-term {
+    color: rgba(var(--f52,142,142,142),1);
+    font-size: 12px;
+    line-height: 16px;
+    margin: 10px 40px;
     text-align: center;
 }
