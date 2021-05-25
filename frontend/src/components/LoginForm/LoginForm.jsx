@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
       <article className="art">
       <div className="gr27e">
         <img src="https://i.imgur.com/bfjUjgq.png" height='90px' width='280px' /> 
-      <form onSubmit={e => this.props.handle_login(e, this.state)}  >
+      <form className="sign-form" onSubmit={e => this.props.handle_login(e, this.state)}  >
         <label htmlFor="username">Username</label>
         <input
           type="text"

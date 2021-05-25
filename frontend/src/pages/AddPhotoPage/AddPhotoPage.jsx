@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import './AddPhotoPage.css'
 import { Form, Button } from "react-bootstrap";
 
 export default function AddPhotoPage() {
@@ -32,7 +33,7 @@ export default function AddPhotoPage() {
   };
 
   return (
-    <div>
+    <div className="add-photo">
       <h1>Add Photo</h1>
       <Form onSubmit={handleSubmit}>
 

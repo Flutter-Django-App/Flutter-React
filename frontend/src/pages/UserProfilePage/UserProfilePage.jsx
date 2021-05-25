@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./UserProfilePage.css";
 import { Row, Col, Card, CardGroup, CardColumns } from "react-bootstrap";
 
-
-export default function UserProfilePage({user}) {
+export default function UserProfilePage({ user }) {
   const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
-  
 
-//   useEffect(() => {
-//     async function fetchUser() {
-//       const { data } = await axios.get("/profile/");
-//       setUser(data);
-//     }
-//     fetchUser();
-//   }, []);
+  //   useEffect(() => {
+  //     async function fetchUser() {
+  //       const { data } = await axios.get("/profile/");
+  //       setUser(data);
+  //     }
+  //     fetchUser();
+  //   }, []);
 
   useEffect(() => {
     async function fetchAllUsers() {
@@ -33,9 +32,9 @@ export default function UserProfilePage({user}) {
     fetchPhotos();
   }, []);
 
-  console.log(photos)
+  console.log(photos);
   console.log(user);
-  console.log(allUsers)
+  console.log(allUsers);
 
   // users.map((user) => (
 
@@ -43,74 +42,97 @@ export default function UserProfilePage({user}) {
   // )
 
   return (
-    <div>
-      <h1>Profile Page</h1>
-
-      <CardGroup>
-        <Card>
-          <Card.Img variant="top" src="holder.js/100px160" />
-          <Card.Body>
-            <Card.Title>
-              <div>{user.username}</div>
-              <div >Last Login: {new Date(user.last_login).toLocaleDateString()}</div>
-            </Card.Title>
-            <Card.Text>I love eating</Card.Text>
-            <Card.Link>
-              <div className="">
-                <Link
-                  className="btn btn-xs"
-                  to={{
-                    pathname: "/profile/update",
-                    state: { user },
-                  }}
-                  user={user}
-                >
-                  EDIT PROFILE
-                </Link>
+    <>
+    <main className="profile-main pro-main pro-main-2">
+    <div className="profile-1 profile-3 prof-1">
+      {/* <h1> </h1> */}
+      <header className="header-1">
+        <CardGroup>
+          <Card>
+            <div className="profile-img-1">
+              <div className="profile-img-2">
+                <h1>
+                  
+                </h1>
+                <img className="pic-prof" src="{photo.url}" />
+                <span className="span-pic">
+                  
+                  </span>
               </div>
-            </Card.Link>
-          </Card.Body>
-          <Card.Footer>
-            <small className="text-muted">
-              Joined on {new Date(user.date_joined).toLocaleDateString()}
-            </small>
-          </Card.Footer>
-        </Card>
-      </CardGroup>
+            </div>
+            <section className="profile-sec">
+                <div className="profile-div-1">
+            <Card.Body>
+              <Card.Title>
+                <h2 className="user-name name name1 name-profile">{user.username}</h2>
+                <br />
+                <div className="user-name name name1 name-profile">
+                  Last Login: {new Date(user.last_login).toLocaleDateString()}
+                </div>
+                <br />
+              </Card.Title>
+              {/* <Card.Text>I love eating</Card.Text> */}
+              <div className="btn-1 btn-2 btn-3">
+              <Card.Link>
+                  <Link
+                    className="btn btn-xs"
+                    to={{
+                      pathname: "/profile/update",
+                      state: { user },
+                    }}
+                    user={user}
+                  >
+                    <button>Edit Profile</button>
+                  </Link>
+              </Card.Link>
+              </div>
+            </Card.Body>
+                </div>
+            </section>
+            
+            <Card.Footer>
+              <small className="text-muted">
+                Joined on {new Date(user.date_joined).toLocaleDateString()}
+              </small>
+            </Card.Footer>
+          </Card>
+        </CardGroup>
+      </header>
+      </div>
 
       <Row>
         {photos.map((photo) => (
           <CardColumns>
             {photo.user === user.id ? (
-            <Card className="my-3 p-3 rounded">
-              <Card.Body as="div">
-                <Card.Title as="div">
-                  <strong>{photo.user}</strong>
-                </Card.Title>
-                <Card.Text as="div">
-                  <img className="my-3" src={photo.url} />
-                </Card.Text>
-                <Card.Text as="div">
-                  <div className="my-3">{photo.location}</div>
-                </Card.Text>
-                <Card.Text as="div">
-                  <div className="my-3">{photo.caption}</div>
-                </Card.Text>
-                <Card.Text as="div">
-                  <div className="my-3">
-                    Likes: {photo.total_likes} | Comments:{" "}
-                    {photo.total_comments}
-                  </div>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-         
-         ) : (
-           console.log('bye'))
-          }
+              <Card className="my-3 p-3 rounded">
+                <Card.Body as="div">
+                  <Card.Title as="div">
+                    <strong>{photo.user}</strong>
+                  </Card.Title>
+                  <Card.Text as="div">
+                    <img className="my-3" src={photo.url} />
+                  </Card.Text>
+                  <Card.Text as="div">
+                    <div className="my-3">{photo.location}</div>
+                  </Card.Text>
+                  <Card.Text as="div">
+                    <div className="my-3">{photo.caption}</div>
+                  </Card.Text>
+                  <Card.Text as="div">
+                    <div className="my-3">
+                      Likes: {photo.total_likes} | Comments:{" "}
+                      {photo.total_comments}
+                    </div>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            ) : (
+              console.log("bye")
+              )}
           </CardColumns>
         ))}
-        </Row>
-    </div>
+      </Row>
+    </main>
+      </>
   );
 }
