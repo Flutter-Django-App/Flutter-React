@@ -4,6 +4,7 @@ import './IndexPage.css'
 import { Row, Col, Card, CardGroup } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+
 export default function IndexPage({ user }) {
   const [allUsers, setAllUsers] = useState([]);
 
@@ -16,15 +17,15 @@ export default function IndexPage({ user }) {
     comment: "",
   });
   // const history = useHistory();
-  console.log(allUsers)
-  useEffect(() => {
-    async function fetchAllUsers() {
-      const { data } = await axios.get("/allusers/");
-      setAllUsers(data);
-      console.log(allUsers)
-    }
-    fetchAllUsers();
-  }, []);
+  // console.log(allUsers)
+  // useEffect(() => {
+  //   async function fetchAllUsers() {
+  //     const { data } = await axios.get("/allusers/");
+  //     setAllUsers(data);
+  //     console.log(allUsers)
+  //   }
+  //   fetchAllUsers();
+  // }, []);
   
   useEffect(() => {
     async function fetchPhotos() {
@@ -33,20 +34,20 @@ export default function IndexPage({ user }) {
     }
     fetchPhotos();
   }, []);
-  useEffect(() => {
-    async function fetchComments() {
-      const { data } = await axios.get("comments/");
-      setComments(data);
-    }
-    fetchComments();
-  }, []);
-  useEffect(() => {
-    async function fetchLikes() {
-      const { data } = await axios.get("likes/");
-      setLikes(data);
-    }
-    fetchLikes();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchComments() {
+  //     const { data } = await axios.get("comments/");
+  //     setComments(data);
+  //   }
+  //   fetchComments();
+  // }, []);
+  // useEffect(() => {
+  //   async function fetchLikes() {
+  //     const { data } = await axios.get("likes/");
+  //     setLikes(data);
+  //   }
+  //   fetchLikes();
+  // }, []);
   const handleNewCommentChange = (event) => {
     setNewComment(event.target.value);
   };
@@ -95,7 +96,7 @@ export default function IndexPage({ user }) {
             <Card className="my-3 p-3 rounded">
               <Card.Body as="div">
                 <Card.Title as="div">
-                  <strong>{photo.user}</strong>
+                  <strong>{photo.user.username}</strong>
                 </Card.Title>
                 <Card.Text as="div">
                   <div className="my-3">{photo.location}</div>
@@ -203,7 +204,7 @@ export default function IndexPage({ user }) {
                 <Card.Text as="div">
                   <div className="my-3">
                     <span>
-                      <strong>{photo.user}</strong> {photo.caption}
+                      <strong>{photo.user.username}</strong> {photo.caption}
                     </span>
                   </div>
                 </Card.Text>

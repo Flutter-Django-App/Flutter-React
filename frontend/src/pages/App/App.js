@@ -37,14 +37,14 @@ export default function App() {
     fetchUser();
   }, []);
   
-  useEffect(() => {
-    async function fetchAllUsers() {
-      const { data } = await axios.get("/allusers/");
-      setAllUsers(data);
-      console.log(allUsers)
-    }
-    fetchAllUsers();
-  }, [allUsers]);
+  // useEffect(() => {
+  //   async function fetchAllUsers() {
+  //     const { data } = await axios.get("/allusers/");
+  //     setAllUsers(data);
+  //     console.log(allUsers)
+  //   }
+  //   fetchAllUsers();
+  // }, [allUsers]);
 
   const handle_login = async (e, formData) => {
     e.preventDefault();

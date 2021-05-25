@@ -103,11 +103,11 @@ export default function UserProfilePage({ user }) {
       <Row>
         {photos.map((photo) => (
           <CardColumns>
-            {photo.user === user.id ? (
+            {photo.user.id === user.id ? (
               <Card className="my-3 p-3 rounded">
                 <Card.Body as="div">
                   <Card.Title as="div">
-                    <strong>{photo.user}</strong>
+                    <strong>{photo.user.username}</strong>
                   </Card.Title>
                   <Card.Text as="div">
                     <img className="my-3" src={photo.url} />
@@ -120,8 +120,8 @@ export default function UserProfilePage({ user }) {
                   </Card.Text>
                   <Card.Text as="div">
                     <div className="my-3">
-                      Likes: {photo.total_likes} | Comments:{" "}
-                      {photo.total_comments}
+                      Likes: {photo.likes.length} | Comments:{" "}
+                      {photo.comments.length}
                     </div>
                   </Card.Text>
                 </Card.Body>
