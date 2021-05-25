@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 
@@ -48,6 +48,7 @@ export default function App() {
         setLoggedIn(true);
         setUsername(json.user.username);
         setUser(json.user);
+        window.location.href = "/photos";
       });
   };
 

@@ -7,13 +7,13 @@ import { LinkContainer } from "react-router-bootstrap";
 export default function NavBar2({ logged_in, handle_logout }) {
   return (
     <header>
-      <Navbar bg="dark" variant="light" expand="lg" collapseOnSelect>
+      <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container>
+          {logged_in ? (
+            <>
           <LinkContainer to="/">
             <Navbar.Brand>Flutter</Navbar.Brand>
           </LinkContainer>
-          {logged_in ? (
-            <>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
@@ -35,14 +35,7 @@ export default function NavBar2({ logged_in, handle_logout }) {
               </Navbar.Collapse>
             </>
           ) : (
-            <Nav className="mr-auto">
-              <LinkContainer to="/signup">
-                <Nav.Link>Sign Up</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link>Log In</Nav.Link>
-              </LinkContainer>
-            </Nav>
+           <h1> </h1>
           )}
         </Container>
       </Navbar>

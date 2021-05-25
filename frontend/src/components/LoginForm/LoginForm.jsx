@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './LoginForm.css'
+import { Redirect } from 'react-router-dom'
 
 class LoginForm extends React.Component {
   state = {
@@ -27,7 +28,7 @@ class LoginForm extends React.Component {
         </div>
       <div className="gr27e">
         <img src="flutter-logo.png" width='280px' height='90px' />
-      <form onSubmit={e => this.props.handle_login(e, this.state)}>
+      <form onSubmit={e => this.props.handle_login(e, this.state)}  >
         <label htmlFor="username">Username</label>
         <input
           type="text"
@@ -42,7 +43,7 @@ class LoginForm extends React.Component {
           value={this.state.password}
           onChange={this.handle_change}
         />
-        <input type="submit" />
+        <input type="submit"  />
       </form>
       </div>
       <div className="gr27e">
