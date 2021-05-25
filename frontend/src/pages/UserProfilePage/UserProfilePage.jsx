@@ -16,13 +16,13 @@ export default function UserProfilePage({ user }) {
   //     fetchUser();
   //   }, []);
 
-  useEffect(() => {
-    async function fetchAllUsers() {
-      const { data } = await axios.get("/allusers/");
-      setAllUsers(data);
-    }
-    fetchAllUsers();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchAllUsers() {
+  //     const { data } = await axios.get("/allusers/");
+  //     setAllUsers(data);
+  //   }
+  //   fetchAllUsers();
+  // }, []);
 
   useEffect(() => {
     async function fetchPhotos() {
