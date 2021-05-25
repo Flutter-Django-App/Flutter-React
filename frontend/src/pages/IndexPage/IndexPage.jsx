@@ -16,12 +16,12 @@ export default function IndexPage({ user }) {
     comment: "",
   });
   // const history = useHistory();
-  console.log(allUsers)
+  // console.log(allUsers)
   useEffect(() => {
     async function fetchAllUsers() {
       const { data } = await axios.get("/allusers/");
       setAllUsers(data);
-      console.log(allUsers)
+      // console.log(allUsers)
     }
     fetchAllUsers();
   }, []);
@@ -62,11 +62,12 @@ export default function IndexPage({ user }) {
     e.preventDefault();
     try {
       const res = await axios.post("comments/create/", formData);
-      console.log(res);
+      // console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
+
   const handleLike = async (e) => {
     e.preventDefault();
     setLikedPhotoId(e.target.value);

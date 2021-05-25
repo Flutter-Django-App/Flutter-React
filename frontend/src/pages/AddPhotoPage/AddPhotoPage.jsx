@@ -4,13 +4,12 @@ import axios from "axios";
 import './AddPhotoPage.css'
 import { Form, Button } from "react-bootstrap";
 
-export default function AddPhotoPage() {
+export default function AddPhotoPage({user}) {
+  const [showPhoto, setShowPhoto] = useState('Upload a Photo')
   const [formData, setFormData] = useState({
     caption: "",
     location: "",
     url: "",
-    total_likes: 0,
-    total_comments: 0,
   });
   const history = useHistory();
 
@@ -24,7 +23,10 @@ export default function AddPhotoPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/photos/create/", formData);
+      console.log(formData.url)
+      // console.log(formData.caption)
+      // console.log(formData.location)
+      const res = await axios.post(`/photos/${user.id}/add_photo/`, formData);
       console.log(res);
       history.push("photos");
     } catch (err) {
