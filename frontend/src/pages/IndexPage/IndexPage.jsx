@@ -63,11 +63,12 @@ export default function IndexPage({ user }) {
     e.preventDefault();
     try {
       const res = await axios.post("comments/create/", formData);
-      console.log(res);
+      // console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
+
   const handleLike = async (e) => {
     e.preventDefault();
     setLikedPhotoId(e.target.value);

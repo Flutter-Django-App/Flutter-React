@@ -16,6 +16,9 @@ import AddPhotoPage from "../../pages/AddPhotoPage/AddPhotoPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
 import EditProfilePage from "../../pages/EditProfilePage/EditProfilePage";
 
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 export default function App() {
   const [logged_in, setLoggedIn] = useState(
     localStorage.getItem("token") ? true : false
@@ -147,8 +150,14 @@ export default function App() {
     <Router>
       <NavBar2 logged_in={logged_in} handle_logout={handle_logout} />
       <Container>
+        
         <Route exact path="/">
-          <HomePage logged_in={logged_in} user={user} />
+          {!logged_in ? (
+            <LoginForm handle_login={handle_login} />
+            // <HomePage logged_in={logged_in} user={user} />
+            ) : (
+            <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
+          )}
         </Route>
         <Route exact path="/photos">
           <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
@@ -166,7 +175,11 @@ export default function App() {
           <SignUpForm handle_signup={handle_signup} />
         </Route>
         <Route exact path="/login">
-          <LoginForm handle_login={handle_login} />
+          {logged_in ? (
+            <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
+          ):(
+            <LoginForm handle_login={handle_login} />
+          )}
         </Route>
       </Container>
     </Router>
