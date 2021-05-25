@@ -23,7 +23,12 @@ export default function App() {
   const [username, setUsername] = useState(
     localStorage.getItem("token") ? localStorage.getItem("token").username : " "
   );
+  const [userId, setUserId] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token").id : " "
+  );
   const [user, setUser] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+
 
   useEffect(() => {
     async function fetchUser() {
@@ -32,6 +37,15 @@ export default function App() {
     }
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    async function fetchAllUsers() {
+      const { data } = await axios.get("/allusers/");
+      setAllUsers(data);
+      console.log(allUsers)
+    }
+    fetchAllUsers();
+  }, [allUsers]);
 
   const handle_login = (e, data) => {
     e.preventDefault();
@@ -47,6 +61,7 @@ export default function App() {
         localStorage.setItem("token", json.token);
         setLoggedIn(true);
         setUsername(json.user.username);
+        setUserId(json.user.id);
         setUser(json.user);
         window.location.href = "/photos";
       });
@@ -66,6 +81,7 @@ export default function App() {
         localStorage.setItem("token", json.token);
         setLoggedIn(true);
         setUsername(json.username);
+        setUserId(json.id);
         setUser(json.user);
         window.location.href = "/photos";
       });
@@ -80,6 +96,7 @@ export default function App() {
   // console.log(localStorage.getItem("token"));
   // console.log(username);
   console.log(user);
+  console.log(user.id)
   // console.log(logged_in);
 
 
@@ -126,13 +143,13 @@ export default function App() {
           <HomePage logged_in={logged_in} user={user} />
         </Route>
         <Route exact path="/photos">
-          <IndexPage logged_in={logged_in} user={user} />
+          <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
         </Route>
         <Route exact path="/photos/create">
           <AddPhotoPage logged_in={logged_in} user={user} />
         </Route>
         <Route exact path="/profile">
-          <UserProfilePage logged_in={logged_in} user={user} />
+          <UserProfilePage logged_in={logged_in} user={user} allUsers={allUsers} />
         </Route>
         <Route exact path="/profile/update">
           <EditProfilePage logged_in={logged_in} user={user} />

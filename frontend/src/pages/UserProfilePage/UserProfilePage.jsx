@@ -4,8 +4,8 @@ import axios from "axios";
 import { Row, Col, Card, CardGroup, CardColumns } from "react-bootstrap";
 
 
-export default function UserProfilePage({user}) {
-  const [allUsers, setAllUsers] = useState([]);
+export default function UserProfilePage({user, allUsers}) {
+  // const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   
 
@@ -17,13 +17,13 @@ export default function UserProfilePage({user}) {
 //     fetchUser();
 //   }, []);
 
-  useEffect(() => {
-    async function fetchAllUsers() {
-      const { data } = await axios.get("/allusers/");
-      setAllUsers(data);
-    }
-    fetchAllUsers();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchAllUsers() {
+  //     const { data } = await axios.get("/allusers/");
+  //     setAllUsers(data);
+  //   }
+  //   fetchAllUsers();
+  // }, []);
 
   useEffect(() => {
     async function fetchPhotos() {
