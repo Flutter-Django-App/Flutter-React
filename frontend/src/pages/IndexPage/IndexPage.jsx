@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './IndexPage.css'
 import { Row, Col, Card, CardGroup } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
@@ -68,12 +69,12 @@ export default function IndexPage() {
   console.log(formData);
 
   return (
-    <div className="col align-self-center">
-      <h1>Photos Index Page</h1>
-
+    <section className="index-pg ind-pg">
+      {/* <h1>Photos Index Page</h1> */}
+      <div className="ind-div">
       <Row>
         {photos.map((photo) => (
-      <CardGroup>
+      <CardGroup >
       <Card className="my-3 p-3 rounded">
               <Card.Body as="div">
                 <Card.Title as="div">
@@ -108,10 +109,11 @@ export default function IndexPage() {
                     </>
                   ))}
                 </Card.Text>
-
-                <Form onSubmit={handleSubmit}>
+                <section class="com-sec comment">
+                  <div className="comment-sec">
+                <Form className="form-com" onSubmit={handleSubmit}>
                   <Form.Group>
-                    <strong>{photo.user}</strong>
+                    {/* <strong>{photo.user}</strong> */}
                     <Form.Control
                       type="text"
                       placeholder="Enter Comment"
@@ -128,10 +130,12 @@ export default function IndexPage() {
                       color="primary"
                       onClick={handleSubmit}
                     >
-                      Send
+                      Post
                     </Button>
                   </Form.Group>
                 </Form>
+                </div>
+                </section>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">
@@ -143,6 +147,7 @@ export default function IndexPage() {
           </CardGroup>
         ))}
       </Row>
-    </div>
+      </div>
+    </section>
   );
 }
