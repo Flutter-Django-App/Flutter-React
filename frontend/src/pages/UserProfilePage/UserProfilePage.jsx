@@ -7,12 +7,11 @@ import {
   Col,
   Card,
   CardGroup,
-  CardColumns,
   Modal,
   Button,
 } from "react-bootstrap";
 export default function UserProfilePage({ user }) {
-  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -118,6 +117,7 @@ export default function UserProfilePage({ user }) {
                               state: { user },
                             }}
                             user={user}
+                            key={user.id}
                           >
                             <button>Edit Profile</button>
                           </Link>
@@ -154,8 +154,8 @@ export default function UserProfilePage({ user }) {
                           <Button variant="light" onClick={handleShow} value={photo.id}>
                             <svg
                               aria-label="More options"
-                              class="_8-yf5 "
-                              fill="#262626"
+                              className="_8-yf5 "
+                              fillRule="#262626"
                               height="16"
                               viewBox="0 0 48 48"
                               width="16"

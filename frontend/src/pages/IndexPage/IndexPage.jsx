@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./IndexPage.css";
-import { Row, Col, Card, CardGroup } from "react-bootstrap";
+import { Row,  Card, CardGroup } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 export default function IndexPage({ user }) {
-  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([]);
+  // const [comments, setComments] = useState([]);
+  // const [likedPhotoId, setLikedPhotoId] = useState([]);
+  // const [likes, setLikes] = useState([]);
+  // const [formData, setFormData] = useState({comment: ""});
   const [photos, setPhotos] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [likes, setLikes] = useState([]);
-  const [likedPhotoId, setLikedPhotoId] = useState([]);
   const [newComment, setNewComment] = useState([]);
-  const [formData, setFormData] = useState({
-    comment: "",
-  });
 
   // const history = useHistory();
 
@@ -102,8 +100,8 @@ export default function IndexPage({ user }) {
       console.log("bleh");
     }
   };
-  console.log(photos);
-  console.log(user);
+  // console.log(photos);
+  // console.log(user);
   // console.log(comments);
   // console.log(likes);
   // console.log(formData);
@@ -130,7 +128,7 @@ export default function IndexPage({ user }) {
                     {photo.likes.map((like) => (
                       <>
                         <Button
-                          variant="light"
+                          variant="contained"
                           type="submit"
                           color="primary"
                           onClick={handleLike}
@@ -153,7 +151,7 @@ export default function IndexPage({ user }) {
                         </Button>
 
                         <Button
-                          variant="light"
+                          variant="contained"
                           type="submit"
                           color="primary"
                           onClick={handleLike}
@@ -177,8 +175,8 @@ export default function IndexPage({ user }) {
                       </>
                     ))}
 
-                    <Button
-                      variant="light"
+                    {/* <Button
+                      variant="contained"
                       disabled={!newComment}
                       type="submit"
                       color="primary"
@@ -202,13 +200,37 @@ export default function IndexPage({ user }) {
                           ></path>
                         </svg>
                       </a>
-                    </Button>
-
+                    </Button> */}
                     <Button
-                      variant="light"
+                      disabled={!newComment}
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit}
+                      value={photo.id}
+                    >
+                      <svg
+                        aria-label="Comment"
+                        class="_8-yf5 "
+                        fill="#262626"
+                        height="24"
+                        viewBox="0 0 48 48"
+                        width="24"
+                      >
+                        <path
+                          clipRule="evenodd"
+                          d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
+                          fillRule="evenodd"
+                        ></path>
+                      </svg>
+                    </Button>
+                    <Button
+                      variant="contained"
                       type="submit"
                       color="primary"
                       onClick={handleLike}
+                      value={photo.id}
+                      ƒ
                     >
                       <a class="wpO6b  " type="submit">
                         <svg
@@ -225,10 +247,11 @@ export default function IndexPage({ user }) {
                     </Button>
 
                     <Button
-                      variant="light"
+                      variant="contained"
                       type="submit"
                       color="primary"
                       onClick={handleLike}
+                      value={photo.id}
                     >
                       <a class="wpO6b  " type="submit">
                         <svg
