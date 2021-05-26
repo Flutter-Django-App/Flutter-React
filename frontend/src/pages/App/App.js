@@ -23,14 +23,14 @@ export default function App() {
   const [logged_in, setLoggedIn] = useState(
     localStorage.getItem("token") ? true : false
   );
-  const [username, setUsername] = useState(
-    localStorage.getItem("token") ? localStorage.getItem("token").username : " "
-  );
-  const [userId, setUserId] = useState(
-    localStorage.getItem("token") ? localStorage.getItem("token").id : " "
-  );
+  // const [username, setUsername] = useState(
+  //   localStorage.getItem("token") ? localStorage.getItem("token").username : " "
+  // );
+  // const [userId, setUserId] = useState(
+  //   localStorage.getItem("token") ? localStorage.getItem("token").id : " "
+  // );
   const [user, setUser] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
     async function fetchUser() {
@@ -71,7 +71,7 @@ export default function App() {
     localStorage.setItem("token", token);
     
     if (localStorage.getItem("token")) {
-      setUsername(user.username); // might be redundant
+      // setUsername(user.username); // might be redundant
       setUser(user);
       setLoggedIn(true);
     }
@@ -91,8 +91,8 @@ export default function App() {
       .then((json) => {
         localStorage.setItem("token", json.token);
         setLoggedIn(true);
-        setUsername(json.username);
-        setUserId(json.id);
+        // setUsername(json.username);
+        // setUserId(json.id);
         setUser(json.user);
         window.location.href = "/photos";
       });
@@ -102,7 +102,8 @@ export default function App() {
   const handle_logout = () => {
     localStorage.removeItem("token");
     setLoggedIn(false);
-    setUsername("");
+    setUser([]);
+    // setUsername("");
   };
 
   // console.log(localStorage.getItem("token"));
@@ -156,17 +157,17 @@ export default function App() {
             <LoginForm handle_login={handle_login} />
             // <HomePage logged_in={logged_in} user={user} />
             ) : (
-            <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
+            <IndexPage logged_in={logged_in} user={user} /*userId={userId}*/  /*allUsers={allUsers}*/ />
           )}
         </Route>
         <Route exact path="/photos">
-          <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
+          <IndexPage logged_in={logged_in} user={user} /*userId={userId} allUsers={allUsers}*/ />
         </Route>
         <Route exact path="/photos/create">
           <AddPhotoPage logged_in={logged_in} user={user} />
         </Route>
         <Route exact path="/profile">
-          <UserProfilePage logged_in={logged_in} user={user} allUsers={allUsers} />
+          <UserProfilePage logged_in={logged_in} user={user} /*allUsers={allUsers}*/ />
         </Route>
         <Route exact path="/profile/update">
           <EditProfilePage logged_in={logged_in} user={user} />
@@ -176,7 +177,7 @@ export default function App() {
         </Route>
         <Route exact path="/login">
           {logged_in ? (
-            <IndexPage logged_in={logged_in} user={user} userId={userId}  allUsers={allUsers}/>
+            <IndexPage logged_in={logged_in} user={user} /*userId={userId}  allUsers={allUsers}*/ />
           ):(
             <LoginForm handle_login={handle_login} />
           )}
