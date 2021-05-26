@@ -38,6 +38,7 @@ export default function UserProfilePage({ user }) {
     }
     fetchPhotos();
   }, []);
+
   const handleDeletePhoto = async (e, photoId) => {
     e.preventDefault();
     const options = {
@@ -58,6 +59,9 @@ export default function UserProfilePage({ user }) {
       setPhotos(response);
     }
   };
+  console.log(user)
+  console.log(photos)
+  
   return (
     <>
       <main className="profile-main pro-main pro-main-2">
@@ -197,8 +201,7 @@ export default function UserProfilePage({ user }) {
                   </Card.Text>
                   <Card.Text as="div">
                     <div className="my-3">
-                      Likes: {photo.total_likes} | Comments:{" "}
-                      {photo.total_comments}
+                      Likes: {photo.likes.length} | Comments: {photo.comments.length}
                     </div>
                   </Card.Text>
                 </Card.Body>
