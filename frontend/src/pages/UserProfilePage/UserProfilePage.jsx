@@ -16,14 +16,10 @@ export default function UserProfilePage({ user }) {
   const [photos, setPhotos] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  //   useEffect(() => {
-  //     async function fetchUser() {
-  //       const { data } = await axios.get("/profile/");
-  //       setUser(data);
-  //     }
-  //     fetchUser();
-  //   }, []);
+  const handleShow = (e) => {
+    console.log(e.target.value)
+    setShow(true);
+  }
   // useEffect(() => {
   //   async function fetchAllUsers() {
   //     const { data } = await axios.get("/allusers/");
@@ -60,9 +56,8 @@ export default function UserProfilePage({ user }) {
   //   }
   // };
   const handleDeletePhoto = async (e) => {
-    console.log(e.target.value)
-    // console.log(photoId)
     e.preventDefault();
+    // const id = e.target.value
     const options = {
       url: `http://localhost:8000/photos/${e.target.value}/delete_photo/`, // maybe wrong
       method: "DELETE",
@@ -70,7 +65,7 @@ export default function UserProfilePage({ user }) {
         Authorization: `JWT ${localStorage.getItem("token")}`,
       },
       data: {
-        photo: e.target.value
+        photo: e.target.value,
       },
     };
     try {
@@ -81,7 +76,7 @@ export default function UserProfilePage({ user }) {
       console.log('bleh')
     }
   }
-  console.log(user)
+  // console.log(user)
   console.log(photos)
   
   return (
@@ -141,20 +136,23 @@ export default function UserProfilePage({ user }) {
           </header>
         </div>
         {photos.map((photo) => (
+          
           <Row>
             {photo.user.id === user.id ? (
+              
               <Card className="my-3 p-3 rounded">
+                <div>{photo.id}</div>
                 <Card.Body as="div">
                   <Card.Title as="div">
                     <Row>
                       <Col>
                         <strong>{photo.user.username}</strong>
                       </Col>
-                      <Col></Col>
-                      <Col></Col>
+                      <Col>{photo.id}</Col>
+                      <Col>{photo.id}</Col>
                       <Col>
                         <CardGroup>
-                          <Button variant="light" onClick={handleShow}>
+                          <Button variant="light" onClick={handleShow} value={photo.id}>
                             <svg
                               aria-label="More options"
                               class="_8-yf5 "
@@ -164,24 +162,24 @@ export default function UserProfilePage({ user }) {
                               width="16"
                             >
                               <circle
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                                 cx="8"
                                 cy="24"
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 r="4.5"
                               ></circle>
                               <circle
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                                 cx="24"
                                 cy="24"
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 r="4.5"
                               ></circle>
                               <circle
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                                 cx="40"
                                 cy="24"
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 r="4.5"
                               ></circle>
                             </svg>
@@ -189,12 +187,12 @@ export default function UserProfilePage({ user }) {
                           <Modal show={show} onHide={handleClose}>
                             <Modal.Header>
                               <Modal.Title>
-                                Are you sure you want to delete this photo?
+                                Are you sure you want to delete this photo? {photo.id}
                               </Modal.Title>
                             </Modal.Header>
                             <Modal.Footer>
                               <Button variant="secondary" onClick={handleClose}>
-                                Cancel
+                                Cancel {photo.id}
                               </Button>
                               <Button
                                 variant="primary"
@@ -202,10 +200,11 @@ export default function UserProfilePage({ user }) {
                                 onClick={handleDeletePhoto}
                                 value={photo.id}
                               >
-                                Delete
+                                Delete {photo.id}
                               </Button>
                             </Modal.Footer>
                           </Modal>
+                              <div> {photo.id}</div>
                         </CardGroup>
                       </Col>
                     </Row>
@@ -218,7 +217,7 @@ export default function UserProfilePage({ user }) {
                   <Card.Text as="div">
                     <div className="my-3">
                       <span>
-                        <strong>{photo.user.username}</strong> {photo.caption}
+                        <strong>{photo.user.username}</strong> {photo.caption} {photo.id}
                       </span>
                     </div>
                   </Card.Text>
@@ -230,7 +229,7 @@ export default function UserProfilePage({ user }) {
                 </Card.Body>
               </Card>
             ) : (
-              console.log("bye")
+              console.log("bye bye photo")
             )}
           </Row>
         ))}
