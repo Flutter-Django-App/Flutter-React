@@ -151,7 +151,7 @@ export default function UserProfilePage({ user }) {
                       <Col></Col>
                       <Col>
                         <CardGroup>
-                          <Button variant="light" onClick={handleShow} value={photo.id}>
+                          <Button variant="contained" onClick={handleShow} value={photo.id}>
                             <svg
                               aria-label="More options"
                               className="_8-yf5 "

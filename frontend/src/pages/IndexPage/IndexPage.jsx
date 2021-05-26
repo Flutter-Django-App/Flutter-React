@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./IndexPage.css";
 import { Row,  Card, CardGroup } from "react-bootstrap";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 // import { useHistory } from "react-router-dom";
 
 export default function IndexPage({ user }) {
@@ -13,7 +13,12 @@ export default function IndexPage({ user }) {
   // const [formData, setFormData] = useState({comment: ""});
   const [photos, setPhotos] = useState([]);
   const [newComment, setNewComment] = useState([]);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = (e) => {
+    console.log(e.target.value)
+    setShow(true);
+  }
   // const history = useHistory();
 
   useEffect(() => {
@@ -60,6 +65,30 @@ export default function IndexPage({ user }) {
       console.log("bleh");
     }
   };
+
+  const handleDeleteComment = async (e) => {
+    e.preventDefault();
+    console.log(e.target.value)
+    const options = {
+      url: `http://localhost:8000/comments/${e.target.value}/delete_comment/`, // maybe wrong
+      method: "DELETE",
+      headers: {
+        Authorization: `JWT ${localStorage.getItem("token")}`,
+      },
+      data: {
+        photo: e.target.value,
+      },
+    };
+    try {
+      const slot = await axios(options).then((response) => {
+        console.log('Response for submission=>', response);
+      });
+    } catch {
+      console.log('bleh')
+    }
+  }
+  // console.log(user)
+  console.log(photos)
 
   // console.log(allUsers)
   // useEffect(() => {
@@ -270,7 +299,7 @@ export default function IndexPage({ user }) {
                   <Card.Text as="div">
                     <div className="my-3">
                       <span>
-                        <strong>{photo.user.username}</strong> {photo.caption}
+                        <strong>{photo.user.username}</strong> {photo.caption} 
                       </span>
                     </div>
                   </Card.Text>
@@ -284,6 +313,60 @@ export default function IndexPage({ user }) {
                           <div className="my-3">
                             <span>
                               <strong>{comment.user}</strong> {comment.comment}{" "}
+                              <CardGroup>
+                          <Button variant="contained" onClick={handleShow} value={comment.id}>
+                            <svg
+                              aria-label="More options"
+                              className="_8-yf5 "
+                              fillRule="#262626"
+                              height="16"
+                              viewBox="0 0 48 48"
+                              width="16"
+                            >
+                              <circle
+                                clipRule="evenodd"
+                                cx="8"
+                                cy="24"
+                                fillRule="evenodd"
+                                r="4.5"
+                              ></circle>
+                              <circle
+                                clipRule="evenodd"
+                                cx="24"
+                                cy="24"
+                                fillRule="evenodd"
+                                r="4.5"
+                              ></circle>
+                              <circle
+                                clipRule="evenodd"
+                                cx="40"
+                                cy="24"
+                                fillRule="evenodd"
+                                r="4.5"
+                              ></circle>
+                            </svg>
+                          </Button>
+                          <Modal show={show} onHide={handleClose}>
+                            <Modal.Header>
+                              <Modal.Title>
+                                Are you sure you want to delete this photo? {comment.id}
+                              </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Footer>
+                              <Button variant="secondary" onClick={handleClose}>
+                                Cancel {comment.id}
+                              </Button>
+                              <Button
+                                variant="primary"
+                                // onClick={handleClose}
+                                onClick={handleDeleteComment}
+                                value={comment.id}
+                              >
+                                Delete {comment.id}
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
+                        </CardGroup>
                             </span>
                           </div>
                         ) : (
