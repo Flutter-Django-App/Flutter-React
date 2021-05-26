@@ -5,6 +5,9 @@ import { Row, Col, Card, CardGroup } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
+// axios.defaults.xsrfCookieName = 'csrftoken'
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 export default function IndexPage({ user }) {
   const [allUsers, setAllUsers] = useState([]);
 
@@ -60,14 +63,29 @@ export default function IndexPage({ user }) {
     }
   };
   const handleSubmit = async (e) => {
+    console.log(newComment);
+    
     e.preventDefault();
+    const options = {
+      url: `http://localhost:8000/comments/${user.id}/create/1/`, // maybe wrong
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${localStorage.getItem("token")}`,
+      },
+      data: {
+        comment: newComment, 
+        user: user.id,
+        photo: user.id
+      },
+    };
     try {
-      const res = await axios.post("comments/create/", formData);
-      // console.log(res);
-    } catch (err) {
-      console.log(err);
+      const slot = await axios(options).then((response) => {
+        console.log('Response for submission=>', response);
+      });
+    } catch {
+      console.log('bleh')
     }
-  };
+  }
 
   const handleLike = async (e) => {
     e.preventDefault();
@@ -81,10 +99,12 @@ export default function IndexPage({ user }) {
     }
     setLikedPhotoId([]);
   };
-  // console.log(photos);
+  console.log(photos);
+  console.log(user)
   // console.log(comments);
   // console.log(likes);
   // console.log(formData);
+  // console.log(photos)
   return (
     <section className="index-pg ind-pg">
       {/* <h1>Photos Index Page</h1> */}
@@ -112,7 +132,7 @@ export default function IndexPage({ user }) {
                       onClick={handleLike}
                       value={photo.id}
                     >
-                      {likes.map((like) => (
+                      {photo.likes.map((like) => (
                         <>
                           <a class="wpO6b  " type="submit">
                             {like.photo === photo.id ? (
@@ -166,7 +186,7 @@ export default function IndexPage({ user }) {
                       color="primary"
                       onClick={handleLike}
                     >
-                      {likes.map((like) => (
+                      {photo.likes.map((like) => (
                         <>
                           <a class="wpO6b  " type="submit">
                             {like.photo === photo.id ? (
@@ -210,10 +230,10 @@ export default function IndexPage({ user }) {
                   </div>
                 </Card.Text>
                 <Card.Text as="div">
-                  <div className="my-3">Likes: {likes.length}</div>
+                  <div className="my-3">Likes: {photo.likes.length}</div>
                 </Card.Text>
                 <Card.Text as="div">
-                  {comments.map((comment) => (
+                  {photo.comments.map((comment) => (
                     <>
                       {comment.photo === photo.id ? (
                         <div className="my-3">
@@ -248,6 +268,7 @@ export default function IndexPage({ user }) {
                       variant="contained"
                       color="primary"
                       onClick={handleSubmit}
+                      value='comment'
                     >
                       Post
                     </Button>
