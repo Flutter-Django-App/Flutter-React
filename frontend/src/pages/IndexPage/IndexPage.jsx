@@ -66,8 +66,6 @@ export default function IndexPage({ user }) {
         console.log('bleh')
       }
     }
-
-
   // console.log(allUsers)
   // useEffect(() => {
   //   async function fetchAllUsers() {
@@ -77,13 +75,11 @@ export default function IndexPage({ user }) {
   //   }
   //   fetchAllUsers();
   // }, []);
-  useEffect(() => {
-		// This is listening for each time puppies state is changed,
-		// then will run our function below to reroute
-		history.push("/photos");
-	}, [newComment, history]);
-  
-
+//   useEffect(() => {
+// 		// This is listening for each time newComment state is changed,
+// 		// then will run our function below to reroute
+// 		history.push("/photos");
+// 	}, [newComment, history]);
   // useEffect(() => {
   //   async function fetchComments() {
   //     const { data } = await axios.get("comments/");
@@ -99,57 +95,7 @@ export default function IndexPage({ user }) {
   //   fetchLikes();
   // }, []);
 
-  const handleNewCommentChange = (event) => {
-    setNewComment(event.target.value);
-  };
-  const handleKeyUp = (event) => {
-    if (event.key === "Enter") {
-      if (newComment !== "") {
-        handleSubmit(newComment);
-        setNewComment("");
-      }
-    }
-  };
-  const handleSubmit = async (e) => {
-    console.log(user.id);
-    
-    e.preventDefault();
-    const options = {
-      url: `http://localhost:8000/comments/${user.id}/create/1/`, // maybe wrong
-      method: "POST",
-      headers: {
-        Authorization: `JWT ${localStorage.getItem("token")}`,
-      },
-      data: {
-        comment: newComment, 
-        user: user.id,
-        photo: user.id
-      },
-    };
-    try {
-      const slot = await axios(options).then((response) => {
-        console.log('Response for submission=>', response);
-      });
-    } catch {
-      console.log('bleh')
-    }
-    setNewComment('');
-  }
-
-
-  const handleLike = async (e) => {
-    e.preventDefault();
-    setLikedPhotoId(e.target.value);
-    console.log(likedPhotoId);
-    try {
-      const res = await axios.post("likes/create/", likedPhotoId);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-    setLikedPhotoId([]);
-  };
-  console.log(photos);
+ console.log(photos);
   console.log(user)
   // console.log(comments);
   // console.log(likes);
