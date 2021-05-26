@@ -23,8 +23,15 @@ export default function IndexPage({ user }) {
 
   useEffect(() => {
     async function fetchPhotos() {
-      const { data } = await axios.get("photos/");
-      setPhotos(data);
+      const options = {
+        url: `http://localhost:8000/photos/`,
+        method: "GET",
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+      }
+      const response = await axios(options);
+      setPhotos(response.data);
     }
     fetchPhotos();
   }, []);
