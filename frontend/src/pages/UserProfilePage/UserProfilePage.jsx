@@ -141,15 +141,14 @@ export default function UserProfilePage({ user }) {
             {photo.user.id === user.id ? (
               
               <Card className="my-3 p-3 rounded">
-                <div>{photo.id}</div>
                 <Card.Body as="div">
                   <Card.Title as="div">
                     <Row>
                       <Col>
                         <strong>{photo.user.username}</strong>
                       </Col>
-                      <Col>{photo.id}</Col>
-                      <Col>{photo.id}</Col>
+                      <Col></Col>
+                      <Col></Col>
                       <Col>
                         <CardGroup>
                           <Button variant="light" onClick={handleShow} value={photo.id}>
@@ -204,7 +203,6 @@ export default function UserProfilePage({ user }) {
                               </Button>
                             </Modal.Footer>
                           </Modal>
-                              <div> {photo.id}</div>
                         </CardGroup>
                       </Col>
                     </Row>
@@ -217,7 +215,7 @@ export default function UserProfilePage({ user }) {
                   <Card.Text as="div">
                     <div className="my-3">
                       <span>
-                        <strong>{photo.user.username}</strong> {photo.caption} {photo.id}
+                        <strong>{photo.user.username}</strong> {photo.caption} 
                       </span>
                     </div>
                   </Card.Text>
