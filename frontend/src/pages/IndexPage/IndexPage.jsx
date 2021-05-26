@@ -19,7 +19,55 @@ export default function IndexPage({ user }) {
   const [formData, setFormData] = useState({
     comment: "",
   });
-  const history = useHistory();
+
+  // const history = useHistory();
+
+  useEffect(() => {
+    async function fetchPhotos() {
+      const { data } = await axios.get("photos/");
+      setPhotos(data);
+    }
+    fetchPhotos();
+  }, []);
+  
+    const handleNewCommentChange = (event) => {
+      setNewComment(event.target.value);
+    };
+    const handleKeyUp = (event) => {
+      if (event.key === "Enter") {
+        if (newComment !== "") {
+          handleSubmit(newComment);
+          setNewComment("");
+        }
+      }
+    };
+    
+    const handleSubmit = async (e) => {
+      const photo_id = e.target.value
+  
+      e.preventDefault();
+      const options = {
+        url: `http://localhost:8000/comments/${user.id}/create/${photo_id}/`,
+        method: "POST",
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+        data: {
+          photo: photo_id,
+          user: user.id,
+          comment: newComment, 
+        },
+      };
+      try {
+        const comment = await axios(options).then((response) => {
+          console.log('Response for submission=>', response);
+        });
+      } catch {
+        console.log('bleh')
+      }
+    }
+
+
   // console.log(allUsers)
   // useEffect(() => {
   //   async function fetchAllUsers() {
@@ -35,13 +83,7 @@ export default function IndexPage({ user }) {
 		history.push("/photos");
 	}, [newComment, history]);
   
-  useEffect(() => {
-    async function fetchPhotos() {
-      const { data } = await axios.get("photos/");
-      setPhotos(data);
-    }
-    fetchPhotos();
-  }, []);
+
   // useEffect(() => {
   //   async function fetchComments() {
   //     const { data } = await axios.get("comments/");
@@ -56,6 +98,7 @@ export default function IndexPage({ user }) {
   //   }
   //   fetchLikes();
   // }, []);
+
   const handleNewCommentChange = (event) => {
     setNewComment(event.target.value);
   };
@@ -92,6 +135,7 @@ export default function IndexPage({ user }) {
     }
     setNewComment('');
   }
+
 
   const handleLike = async (e) => {
     e.preventDefault();
@@ -274,7 +318,7 @@ export default function IndexPage({ user }) {
                       variant="contained"
                       color="primary"
                       onClick={handleSubmit}
-                      value='comment'
+                      value={photo.id}
                     >
                       Post
                     </Button>
