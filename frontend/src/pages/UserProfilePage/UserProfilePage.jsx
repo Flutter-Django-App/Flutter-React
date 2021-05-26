@@ -39,26 +39,48 @@ export default function UserProfilePage({ user }) {
     fetchPhotos();
   }, []);
 
-  const handleDeletePhoto = async (e, photoId) => {
+  // const handleDeletePhoto = async (e, photoId) => {
+  //   e.preventDefault();
+  //   const options = {
+  //     url: `http://localhost:8000/photos/${photoId}/delete`,
+  //     method: "DELETE",
+  //     headers: {
+  //       Authorization: `JWT ${localStorage.getItem("token")}`,
+  //     },
+  //     data: {
+  //       photo: photoId,
+  //     },
+  //   };
+  //   const response = await axios(options);
+  //   const token = response.data.token;
+  //   const user = response.data.user;
+  //   localStorage.setItem("token", token);
+  //   if (localStorage.getItem("token")) {
+  //     setPhotos(response);
+  //   }
+  // };
+  const handleDeletePhoto = async (e) => {
+    console.log(e.target.value)
+    // console.log(photoId)
     e.preventDefault();
     const options = {
-      url: "http://localhost:8000/photos/:id/delete",
+      url: `http://localhost:8000/photos/${e.target.value}/delete_photo/`, // maybe wrong
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `JWT ${localStorage.getItem("token")}`,
       },
       data: {
-        photo: photoId,
+        photo: e.target.value
       },
     };
-    const response = await axios(options);
-    const token = response.data.token;
-    const user = response.data.user;
-    localStorage.setItem("token", token);
-    if (localStorage.getItem("token")) {
-      setPhotos(response);
+    try {
+      const slot = await axios(options).then((response) => {
+        console.log('Response for submission=>', response);
+      });
+    } catch {
+      console.log('bleh')
     }
-  };
+  }
   console.log(user)
   console.log(photos)
   
@@ -176,8 +198,9 @@ export default function UserProfilePage({ user }) {
                               </Button>
                               <Button
                                 variant="primary"
-                                onClick={handleClose}
-                                onSubmit={handleDeletePhoto}
+                                // onClick={handleClose}
+                                onClick={handleDeletePhoto}
+                                value={photo.id}
                               >
                                 Delete
                               </Button>
