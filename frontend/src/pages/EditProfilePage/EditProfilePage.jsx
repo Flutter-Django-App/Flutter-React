@@ -31,14 +31,9 @@ export default function EditProfilePage({ user }) {
         firstname: formData.first_name,
         last_name: formData.last_name,
         email: formData.email,
+        password: formData.password,
       }
     }
-
-    console.log(formData.username)
-    console.log(formData.first_name)
-    console.log(formData.last_name)
-    console.log(formData.email)
-
     try {
       const updated_profile = await axios(options);
       console.log(updated_profile);
@@ -119,6 +114,15 @@ export default function EditProfilePage({ user }) {
                   className="form-control"
                   name="email"
                   value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  className="form-control"
+                  name="password"
+                  value={formData.password}
                   onChange={handleChange}
                 />
               </div>
