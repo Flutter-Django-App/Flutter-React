@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, useHistory } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 
@@ -24,6 +24,7 @@ export default function App() {
     localStorage.getItem("token") ? true : false
   );
   const [user, setUser] = useState([]);
+  const history = useHistory();
   
   // const [username, setUsername] = useState(
   //   localStorage.getItem("token") ? localStorage.getItem("token").username : " "
@@ -38,8 +39,8 @@ export default function App() {
       console.log('----- Log In Last User via JWT -----')
 
       const token = localStorage.getItem("token")
-      token ? console.log('Sign in Via Token') : console.log('Redirect to Login Page')
 
+      if (token) {
       const jwtHeader = token.split('.')[0]
       const jwtBody = token.split('.')[1]
       const jwtFooter = token.split('.')[2]
@@ -71,7 +72,12 @@ export default function App() {
       console.log('----- User from Token -----')
       console.log(user)
 
-      setUser(user);
+      setUser(user)
+
+      } else {
+        history.push('/login')
+      }
+
     }
     fetchUser();
   }, []);
