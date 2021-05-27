@@ -116,15 +116,6 @@ export default function EditProfilePage({ user }) {
                   onChange={handleChange}
                 />
               </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  className="form-control"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
               <Button
                 type="submit"
                 className="btn btn-xs"
