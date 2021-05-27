@@ -31,7 +31,6 @@ export default function EditProfilePage({ user }) {
         firstname: formData.first_name,
         last_name: formData.last_name,
         email: formData.email,
-        password: formData.password,
       }
     }
     try {
@@ -83,7 +82,7 @@ export default function EditProfilePage({ user }) {
                 <label>Username </label>
                 <input
                   className="form-control"
-                  name="name"
+                  name="username"
                   value={formData.username}
                   onChange={handleChange}
                   required
