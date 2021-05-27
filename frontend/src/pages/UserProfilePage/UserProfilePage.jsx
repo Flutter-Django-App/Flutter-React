@@ -12,7 +12,7 @@ import {
   Modal,
   Button,
 } from "react-bootstrap";
-export default function UserProfilePage({ user }) {
+export default function UserProfilePage({ user, profilePhoto }) {
   // const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [show, setShow] = useState(false);
@@ -47,21 +47,21 @@ export default function UserProfilePage({ user }) {
     fetchPhotos();
   }, []);
 
-  useEffect(() => {
-    async function fetchProfilePhotos() {
-      const options = {
-        url: `http://localhost:8000/profilephoto/`,
-        method: "GET",
-        headers: {
-          Authorization: `JWT ${localStorage.getItem("token")}`,
-        },
-      }
-      const response = await axios(options);
-      setPhotos(response.data);
-      console.log(response.data)
-    }
-    fetchProfilePhotos();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchProfilePhotos() {
+  //     const options = {
+  //       url: `http://localhost:8000/profilephoto/`,
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `JWT ${localStorage.getItem("token")}`,
+  //       },
+  //     }
+  //     const response = await axios(options);
+  //     setPhotos(response.data);
+  //     console.log(response.data)
+  //   }
+  //   fetchProfilePhotos();
+  // }, []);
 
   // const handleDeletePhoto = async (e, photoId) => {
   //   e.preventDefault();
@@ -103,11 +103,11 @@ export default function UserProfilePage({ user }) {
     } catch {
       console.log('bleh')
     }
-    history.push("/profile");
+    history.push("/");
 
   }
   // console.log(user)
-  console.log(photos)
+  // console.log(photos)
   
   return (
     <>
@@ -194,7 +194,7 @@ export default function UserProfilePage({ user }) {
                         <strong>{photo.user.username}</strong>
                       </Col>
                       <Col></Col>
-                      <Col></Col>
+                      <Col>{photo.id}</Col>
                       <Col>
                         <CardGroup>
                           <Button variant="contained" onClick={handleShow} value={photo.id}>
@@ -229,26 +229,24 @@ export default function UserProfilePage({ user }) {
                               ></circle>
                             </svg>
                           </Button>
-                          <Modal show={show} onHide={handleClose}>
-                            <Modal.Header>
-                              <Modal.Title>
-                                Are you sure you want to delete this photo? {photo.id}
-                              </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Footer>
-                              <Button variant="secondary" onClick={handleClose}>
-                                Cancel {photo.id}
+                          {show ? (
+                            
+                           <>
+                              <Button variant="contained" onClick={handleClose}>
+                                Cancel 
                               </Button>
                               <Button
-                                variant="primary"
+                                variant="light"
                                 // onClick={handleClose}
                                 onClick={handleDeletePhoto}
                                 value={photo.id}
                               >
-                                Delete {photo.id}
+                                Delete 
                               </Button>
-                            </Modal.Footer>
-                          </Modal>
+                            </>
+                          ):(
+                            ""
+                          )}
                         </CardGroup>
                       </Col>
                     </Row>

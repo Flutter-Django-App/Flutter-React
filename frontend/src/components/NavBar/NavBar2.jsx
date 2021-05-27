@@ -1,4 +1,4 @@
-import React, { Profiler } from "react";
+import React, { Profiler, useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import PropTypes from "prop-types";
@@ -9,8 +9,27 @@ import {
   RiImageAddFill,
   RiLogoutBoxRLine,
 } from "react-icons/all";
+import {FaArrowCircleUp} from 'react-icons/fa';
+import { Button } from "react-bootstrap";
+
 
 export default function NavBar2({ logged_in, handle_logout }) {
+  const [showScroll, setShowScroll] = useState(false)
+
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 400){
+      setShowScroll(true)
+    } else if (showScroll && window.pageYOffset <= 400){
+      setShowScroll(false)
+    }
+  };
+
+  const scrollTop = () =>{
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  window.addEventListener('scroll', checkScrollTop)
+
   return (
     <div>
       {logged_in ? (
@@ -21,14 +40,15 @@ export default function NavBar2({ logged_in, handle_logout }) {
                   <div className="nav-4">
                     <div className="nav-5" >
                       <span>
-                <a class="a-nav" href="/photos">
                       <img
                         className="nav-logo"
                         src="https://i.imgur.com/bfjUjgq.png"
                         width="140px"
                         height="40px"
+                        className="scrollTop" onClick={scrollTop} 
                       />
-                </a>
+
+                
                 </span>
                     </div>
                   </div>
