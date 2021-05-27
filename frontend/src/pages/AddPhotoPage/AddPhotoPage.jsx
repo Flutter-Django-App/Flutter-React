@@ -9,6 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default function AddPhotoPage({user}) {
   const [showPhoto, setShowPhoto] = useState('Upload a Photo')
+  const [image, setImage] = useState('')
   const [formData, setFormData] = useState({
     caption: "",
     location: "",
@@ -25,14 +26,30 @@ export default function AddPhotoPage({user}) {
     console.log(formData)
   };
 
+
   const handleSubmit = async (e) => {
     const photo_id = e.target.value
-    console.log(user.id)
+    // console.log(e.target.value)
+    console.log('clicked')
     console.log(photo_id)
     console.log(formData.caption)
     console.log(formData.location)
     console.log(formData.url)
     e.preventDefault();
+    let img = ''
+    const imageData = new FormData()
+    imageData.append('file', image)
+    imageData.append('upload_preset', 'ggurtht8')
+    await axios.post('https://api.cloudinary.com/v1_1/edithr2852/image/upload', imageData)
+    .then((res) => {
+      console.log(res.data.url)
+      img = res.data.url
+      // setFormData({
+      //   ...formData,
+      //   url: res.data.url,
+      // });
+    })
+    console.log('axios finished', img)
     const options = {
       url: `http://localhost:8000/photos/${user.id}/add_photo/`,
       method: "POST",
@@ -44,7 +61,7 @@ export default function AddPhotoPage({user}) {
         user: user.id,
         caption: formData.caption, 
         location: formData.location,
-        url: formData.url,
+        url: img,
       },
     };
     try {
@@ -84,7 +101,10 @@ export default function AddPhotoPage({user}) {
           <Form.Control
             type="file"
             name="url"
-            onChange={handleChange}
+            onChange={(evt) => {
+              console.log(evt.target.files)
+              setImage(evt.target.files[0])
+            }}
           />
         </Form.Group>
         <Form.Group>
