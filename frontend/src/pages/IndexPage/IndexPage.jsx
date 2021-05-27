@@ -93,7 +93,7 @@ export default function IndexPage({ user }) {
       },
     };
     try {
-      const slot = await axios(options).then((response) => {
+      const photos = await axios(options).then((response) => {
         console.log('Response for submission=>', response);
       });
     } catch {
@@ -154,7 +154,7 @@ export default function IndexPage({ user }) {
     <section className="index-pg ind-pg">
       {/* <h1>Photos Index Page</h1> */}
       <div className="ind-div">
-        <h1>Photos Index Page</h1>
+        {/* <h1>Photos Index Page</h1> */}
         <Row>
           {photos.map((photo) => (
             <CardGroup>
