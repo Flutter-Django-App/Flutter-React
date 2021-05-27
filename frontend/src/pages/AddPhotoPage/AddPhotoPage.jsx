@@ -4,17 +4,17 @@ import axios from "axios";
 import './AddPhotoPage.css'
 import { Form, Button } from "react-bootstrap";
 
-axios.defaults.xsrfCookieName='csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+// axios.defaults.xsrfCookieName='csrftoken'
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default function AddPhotoPage({user}) {
-  const [showPhoto, setShowPhoto] = useState('Upload a Photo')
+  const [showPhoto, setShowPhoto] = useState('Upload a Photo') // what is this state for?
   const [formData, setFormData] = useState({
     caption: "",
     location: "",
     url: "",
   });
-  const history = useHistory();
+  const history = useHistory(); // Is this doing anything/will be doing something?
 
   const handleChange = (e) => {
     setFormData({
@@ -88,7 +88,7 @@ export default function AddPhotoPage({user}) {
           />
         </Form.Group>
         <Form.Group>
-          <Button type="submit" onChange={handleChange}>Add Photo</Button>
+          <Button type="submit" onChange={handleChange}>Add Photo</Button> {/* is the onChange needed here? */}
         </Form.Group>
       </Form>
     </div>
