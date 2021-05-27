@@ -19,13 +19,32 @@ export default function EditProfilePage({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const options = {
+      url: `http://localhost:8000/profile/${user.id}/update/`,
+      method: "PUT",
+      headers: {
+        Authorization: `JWT ${localStorage.getItem("token")}`,
+      },
+      data: {
+        username: formData.username,
+        firstname: formData.first_name,
+        last_name: formData.last_name,
+        email: formData.email,
+      }
+    }
+
+    console.log(formData.username)
+    console.log(formData.first_name)
+    console.log(formData.last_name)
+    console.log(formData.email)
+
     try {
-      console.log("hitting");
-      const res = await axios.put("/profile/update/", formData);
-      console.log(res);
-      history.push("/user");
+      const updated_profile = await axios(options);
+      console.log(updated_profile);
+      // history.push("/user");
     } catch (err) {
-      console.log(err);
+      console.log('Failed to Update');
     }
     history.push("/");
   };
@@ -34,8 +53,8 @@ export default function EditProfilePage({ user }) {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-      [e.target.first_name]: e.target.value,
-      [e.target.first_name]: e.target.value,
+      // [e.target.first_name]: e.target.value,
+      // [e.target.first_name]: e.target.value,
     });
   };
 
@@ -46,7 +65,7 @@ export default function EditProfilePage({ user }) {
       <section className="_9eogI E3X2T">
         <main className="SCxLW o64aR">
           <div className="BcMHM EzUlV XfvCs">
-            <ul className="wW1cu">
+            {/* <ul className="wW1cu">
               <li>
                 <a className="h-aRd -HRM- " href="update" tabIndex="0">
                   Edit Profile
@@ -61,7 +80,7 @@ export default function EditProfilePage({ user }) {
                   Change Password
                 </a>
               </li>
-            </ul>
+            </ul> */}
 
             <Form ref={formRef} autoComplete="off" onSubmit={handleSubmit}>
               {/* <h1>{user.username}</h1> */}
@@ -70,7 +89,7 @@ export default function EditProfilePage({ user }) {
                 <input
                   className="form-control"
                   name="name"
-                  value={formData.name}
+                  value={formData.username}
                   onChange={handleChange}
                   required
                 />
@@ -91,6 +110,15 @@ export default function EditProfilePage({ user }) {
                   className="form-control"
                   name="last_name"
                   value={formData.last_name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  className="form-control"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                 />
               </div>
