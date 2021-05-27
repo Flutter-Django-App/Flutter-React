@@ -33,21 +33,48 @@ export default function App() {
   // );
   // const [allUsers, setAllUsers] = useState([]);
 
-  // useEffect(() => {
-  //   async function fetchUser() {
-  //     const options = {
-  //       url: "http://localhost:8000/profile/",
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `JWT ${localStorage.getItem("token")}`,
-  //       }
-  //     }
-  //     const data = await axios.get("/profile/");
-  //     console.log(data)
-  //     // setUser(data);
-  //   }
-  //   fetchUser();
-  // }, []);
+  useEffect(() => {
+    async function fetchUser() {
+      console.log('----- Log In Last User via JWT -----')
+
+      const token = localStorage.getItem("token")
+      token ? console.log('Sign in Via Token') : console.log('Redirect to Login Page')
+
+      const jwtHeader = token.split('.')[0]
+      const jwtBody = token.split('.')[1]
+      const jwtFooter = token.split('.')[2]
+      console.log('----- Split JWT -----')
+      console.log(jwtHeader)
+      console.log(jwtBody)
+      console.log(jwtFooter)
+
+      const parsed = JSON.parse(atob(jwtBody))
+      console.log('----- Parsed JWT body -----')  
+      console.log(parsed)  
+      
+      const username = parsed.username
+      console.log('----- username -----')
+      console.log(username)
+
+      const options = {
+        url: "http://localhost:8000/profile/",
+        method: "GET",
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        }
+      }
+      const res = await axios(options);
+      console.log('----- Axios Data -----')
+      console.log(res)
+
+      const user = res.data
+      console.log('----- User from Token -----')
+      console.log(user)
+
+      setUser(user);
+    }
+    fetchUser();
+  }, []);
   
   // useEffect(() => {
   //   async function fetchAllUsers() {
