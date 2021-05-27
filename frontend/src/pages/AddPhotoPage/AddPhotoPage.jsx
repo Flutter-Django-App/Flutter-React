@@ -4,8 +4,8 @@ import axios from "axios";
 import './AddPhotoPage.css'
 import { Form, Button } from "react-bootstrap";
 
-axios.defaults.xsrfCookieName='csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+// axios.defaults.xsrfCookieName='csrftoken'
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default function AddPhotoPage({user}) {
   const [showPhoto, setShowPhoto] = useState('Upload a Photo')
@@ -15,7 +15,7 @@ export default function AddPhotoPage({user}) {
     location: "",
     url: "",
   });
-  const history = useHistory();
+  const history = useHistory(); // Is this doing anything/will be doing something?
 
   const handleChange = (e) => {
     setFormData({
@@ -25,7 +25,6 @@ export default function AddPhotoPage({user}) {
     });
     console.log(formData)
   };
-
 
   const handleSubmit = async (e) => {
     const photo_id = e.target.value
@@ -71,6 +70,7 @@ export default function AddPhotoPage({user}) {
     } catch {
       console.log('bleh')
     }
+    history.push("/profile");
   }
 
   return (
@@ -108,7 +108,7 @@ export default function AddPhotoPage({user}) {
           />
         </Form.Group>
         <Form.Group>
-          <Button type="submit" onChange={handleChange}>Add Photo</Button>
+          <Button type="submit" onChange={handleChange}>Add Photo</Button> {/* is the onChange needed here? */}
         </Form.Group>
       </Form>
     </div>

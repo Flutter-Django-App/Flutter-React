@@ -18,23 +18,24 @@ export default function NavBar2({ logged_in, handle_logout }) {
           <div className="nav-b2 nav-bar2">
             <div className="nav-bar nav-b">
               <div className="nav-3">
-                <a class="a-nav" href="/photos">
                   <div className="nav-4">
-                    <div className="nav-5">
+                    <div className="nav-5" >
+                      <span>
+                <a class="a-nav" href="/photos">
                       <img
                         className="nav-logo"
                         src="https://i.imgur.com/bfjUjgq.png"
                         width="140px"
-                        height="50px"
+                        height="40px"
                       />
+                </a>
+                </span>
                     </div>
                   </div>
-                </a>
               </div>
               <div className="nav-6">
                 <Navbar>
                   <Container>
-                    <Navbar.Toggle />
                     <Navbar.Collapse>
                       <Nav>
                         <div className="icon-div">
@@ -45,7 +46,7 @@ export default function NavBar2({ logged_in, handle_logout }) {
                           </LinkContainer>
                         </div>
                         <div className="icon-div" >
-                          <div>
+                          <div >
                             <LinkContainer to="/photos/create">
                               <Nav.Link>
                               <img 
