@@ -15,6 +15,7 @@ import IndexPage from "../../pages/IndexPage/IndexPage";
 import AddPhotoPage from "../../pages/AddPhotoPage/AddPhotoPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
 import EditProfilePage from "../../pages/EditProfilePage/EditProfilePage";
+import AddProfilePhotoPage from "../AddProfilePhotoPage/AddProfilePhotoPage";
 
 // axios.defaults.xsrfCookieName = 'csrftoken'
 // axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -227,6 +228,9 @@ export default function App() {
         </Route>
         <Route exact path="/profile/update">
           <EditProfilePage logged_in={logged_in} user={user} />
+        </Route>
+        <Route exact path="/profile/photo">
+          <AddProfilePhotoPage logged_in={logged_in} user={user} />
         </Route>
         <Route exact path="/signup">
           <SignUpForm handle_signup={handle_signup} />

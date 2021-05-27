@@ -42,8 +42,25 @@ export default function UserProfilePage({ user }) {
       }
       const response = await axios(options);
       setPhotos(response.data);
+      console.log(response.data)
     }
     fetchPhotos();
+  }, []);
+
+  useEffect(() => {
+    async function fetchProfilePhotos() {
+      const options = {
+        url: `http://localhost:8000/profilephoto/`,
+        method: "GET",
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+      }
+      const response = await axios(options);
+      setPhotos(response.data);
+      console.log(response.data)
+    }
+    fetchProfilePhotos();
   }, []);
 
   // const handleDeletePhoto = async (e, photoId) => {
@@ -102,8 +119,8 @@ export default function UserProfilePage({ user }) {
               <Card>
                 <div className="profile-img-1">
                   <div className="profile-img-2">
-                    <h1></h1>
-                    <img className="pic-prof" src="{photo.url}" />
+                    <h1> </h1>
+                    <img className="pic-prof" src="{profile.url}" alt='' />
                     <span className="span-pic"></span>
                   </div>
                 </div>
@@ -134,6 +151,21 @@ export default function UserProfilePage({ user }) {
                             key={user.id}
                           >
                             <button>Edit Profile</button>
+                          </Link>
+                        </Card.Link>
+                      </div>
+                      <div className="btn-1 btn-2 btn-3">
+                        <Card.Link>
+                          <Link
+                            className="btn btn-xs"
+                            to={{
+                              pathname: "/profile/photo",
+                              state: { user },
+                            }}
+                            user={user}
+                            key={user.id}
+                          >
+                            <button>Add Profile Photo</button>
                           </Link>
                         </Card.Link>
                       </div>
