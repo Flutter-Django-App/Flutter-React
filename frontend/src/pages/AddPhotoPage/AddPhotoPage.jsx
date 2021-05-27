@@ -27,11 +27,11 @@ export default function AddPhotoPage({user}) {
 
   const handleSubmit = async (e) => {
     const photo_id = e.target.value
-    console.log(user.id)
-    console.log(photo_id)
-    console.log(formData.caption)
-    console.log(formData.location)
-    console.log(formData.url)
+    // console.log(user.id)
+    // console.log(photo_id)
+    // console.log(formData.caption)
+    // console.log(formData.location)
+    // console.log(formData.url)
     e.preventDefault();
     const options = {
       url: `http://localhost:8000/photos/${user.id}/add_photo/`,
@@ -54,6 +54,7 @@ export default function AddPhotoPage({user}) {
     } catch {
       console.log('bleh')
     }
+    history.push("/profile");
   }
 
   return (

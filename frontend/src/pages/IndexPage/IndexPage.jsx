@@ -3,7 +3,7 @@ import axios from "axios";
 import "./IndexPage.css";
 import { Row,  Card, CardGroup } from "react-bootstrap";
 import { Form, Button, Modal } from "react-bootstrap";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function IndexPage({ user }) {
   // const [allUsers, setAllUsers] = useState([]);
@@ -19,7 +19,11 @@ export default function IndexPage({ user }) {
     console.log(e.target.value)
     setShow(true);
   }
-  // const history = useHistory();
+  const history = useHistory();
+
+	// useEffect(() => {
+	// 	history.push("/photos/");
+	// }, [photos, history]);
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -32,6 +36,7 @@ export default function IndexPage({ user }) {
       }
       const response = await axios(options);
       setPhotos(response.data);
+      history.push("/photos/");
     }
     fetchPhotos();
   }, []);
@@ -71,6 +76,7 @@ export default function IndexPage({ user }) {
     } catch {
       console.log("bleh");
     }
+    history.push("/");
   };
 
   const handleDeleteComment = async (e) => {
@@ -93,6 +99,7 @@ export default function IndexPage({ user }) {
     } catch {
       console.log('bleh')
     }
+    history.push("/");
   }
   // console.log(user)
   console.log(photos)
@@ -135,6 +142,7 @@ export default function IndexPage({ user }) {
     } catch {
       console.log("bleh");
     }
+    history.push("/");
   };
   // console.log(photos);
   // console.log(user);
