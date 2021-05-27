@@ -27,6 +27,7 @@ export default function EditProfilePage({ user }) {
     } catch (err) {
       console.log(err);
     }
+    history.push("/");
   };
 
   const handleChange = (e) => {

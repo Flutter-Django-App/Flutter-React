@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import axios from "axios";
 import "./UserProfilePage.css";
 import {
@@ -19,6 +21,8 @@ export default function UserProfilePage({ user }) {
     console.log(e.target.value)
     setShow(true);
   }
+  const history = useHistory();
+
   // useEffect(() => {
   //   async function fetchAllUsers() {
   //     const { data } = await axios.get("/allusers/");
@@ -82,6 +86,8 @@ export default function UserProfilePage({ user }) {
     } catch {
       console.log('bleh')
     }
+    history.push("/profile");
+
   }
   // console.log(user)
   console.log(photos)
