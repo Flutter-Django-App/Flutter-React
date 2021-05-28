@@ -4,7 +4,7 @@ import axios from "axios";
 import "./EditProfilePage.css";
 import { Form, Button } from "react-bootstrap";
 
-export default function EditProfilePage({ user }) {
+export default function EditProfilePage({ user, setUser }) {
   const location = useLocation();
 
   const [invalidForm, setValidForm] = useState(true);
@@ -35,8 +35,8 @@ export default function EditProfilePage({ user }) {
     }
     try {
       const updated_profile = await axios(options);
-      console.log(updated_profile);
-      // history.push("/user");
+      console.log(updated_profile.data);
+      setUser(updated_profile.data)
     } catch (err) {
       console.log('Failed to Update');
     }
