@@ -28,7 +28,7 @@ export default function EditProfilePage({ user }) {
       },
       data: {
         username: formData.username,
-        firstname: formData.first_name,
+        first_name: formData.first_name,
         last_name: formData.last_name,
         email: formData.email,
       }
@@ -40,7 +40,7 @@ export default function EditProfilePage({ user }) {
     } catch (err) {
       console.log('Failed to Update');
     }
-    history.push("/");
+    history.push("/profile");
   };
 
   const handleChange = (e) => {
@@ -105,6 +105,7 @@ export default function EditProfilePage({ user }) {
                   name="last_name"
                   value={formData.last_name}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -114,6 +115,7 @@ export default function EditProfilePage({ user }) {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <Button

@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { BrowserRouter as Router, Redirect, Route, useHistory } from "react-router-dom";
+import { HashRouter as Router, Redirect, Route, useHistory } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 
@@ -26,7 +26,8 @@ export default function App() {
   );
   const [user, setUser] = useState([]);
   const history = useHistory();
-  
+  const [profilePhoto, setProfilePhoto] = useState('Add a Profile Picure!');
+
   // const [username, setUsername] = useState(
   //   localStorage.getItem("token") ? localStorage.getItem("token").username : " "
   // );
@@ -34,53 +35,70 @@ export default function App() {
   //   localStorage.getItem("token") ? localStorage.getItem("token").id : " "
   // );
   // const [allUsers, setAllUsers] = useState([]);
-
+  
   useEffect(() => {
     async function fetchUser() {
       console.log('----- Log In Last User via JWT -----')
-
-      const token = localStorage.getItem("token")
-
-      if (token) {
-      const jwtHeader = token.split('.')[0]
-      const jwtBody = token.split('.')[1]
-      const jwtFooter = token.split('.')[2]
-      console.log('----- Split JWT -----')
-      console.log(jwtHeader)
-      console.log(jwtBody)
-      console.log(jwtFooter)
-
-      const parsed = JSON.parse(atob(jwtBody))
-      console.log('----- Parsed JWT body -----')  
-      console.log(parsed)  
       
-      const username = parsed.username
-      console.log('----- username -----')
-      console.log(username)
-
-      const options = {
-        url: "http://localhost:8000/profile/",
+      const token = localStorage.getItem("token")
+      
+      if (token) {
+        const jwtHeader = token.split('.')[0]
+        const jwtBody = token.split('.')[1]
+        const jwtFooter = token.split('.')[2]
+        console.log('----- Split JWT -----')
+        console.log(jwtHeader)
+        console.log(jwtBody)
+        console.log(jwtFooter)
+        
+        const parsed = JSON.parse(atob(jwtBody))
+        console.log('----- Parsed JWT body -----')  
+        console.log(parsed)  
+        
+        const username = parsed.username
+        console.log('----- username -----')
+        console.log(username)
+        
+        const options = {
+          url: "http://localhost:8000/profile/",
+          method: "GET",
+          headers: {
+            Authorization: `JWT ${localStorage.getItem("token")}`,
+          }
+        }
+        const res = await axios(options);
+        console.log('----- Axios Data -----')
+        console.log(res)
+        
+        const user = res.data
+        console.log('----- User from Token -----')
+        console.log(user)
+        
+        setUser(user)
+        
+      } else {
+        history.push('/')
+      }
+      
+    }
+    fetchUser();
+  }, []);
+  
+  useEffect(() => {
+      async function fetchProfilePhotos() {
+          const options = {
+              url: `http://localhost:8000/profilephoto/`,
         method: "GET",
         headers: {
           Authorization: `JWT ${localStorage.getItem("token")}`,
-        }
+        },
       }
-      const res = await axios(options);
-      console.log('----- Axios Data -----')
-      console.log(res)
-
-      const user = res.data
-      console.log('----- User from Token -----')
-      console.log(user)
-
-      setUser(user)
-
-      } else {
-        history.push('/login')
-      }
-
+      const response = await axios(options);
+      setProfilePhoto(response.data);
+      console.log(profilePhoto)
+      history.push("/");
     }
-    fetchUser();
+    fetchProfilePhotos();
   }, []);
   
   // useEffect(() => {
@@ -224,7 +242,7 @@ export default function App() {
           <AddPhotoPage logged_in={logged_in} user={user} />
         </Route>
         <Route exact path="/profile">
-          <UserProfilePage logged_in={logged_in} user={user} /*allUsers={allUsers}*/ />
+          <UserProfilePage logged_in={logged_in} user={user} profilePhoto={profilePhoto} /*allUsers={allUsers}*/ />
         </Route>
         <Route exact path="/profile/update">
           <EditProfilePage logged_in={logged_in} user={user} />

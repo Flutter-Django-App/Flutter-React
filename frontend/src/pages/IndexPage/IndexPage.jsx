@@ -361,26 +361,24 @@ export default function IndexPage({ user }) {
                               ></circle>
                             </svg>
                           </Button>
-                          <Modal show={show} onHide={handleClose}>
-                            <Modal.Header>
-                              <Modal.Title>
-                                Are you sure you want to delete this photo? {comment.id}
-                              </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Footer>
-                              <Button variant="secondary" onClick={handleClose}>
-                                Cancel {comment.id}
-                              </Button>
-                              <Button
-                                variant="primary"
-                                // onClick={handleClose}
-                                onClick={handleDeleteComment}
-                                value={comment.id}
-                              >
-                                Delete {comment.id}
-                              </Button>
-                            </Modal.Footer>
-                          </Modal>
+                          {show ? (
+                            
+                            <>
+                               <Button variant="contained" onClick={handleClose}>
+                                 Cancel 
+                               </Button>
+                               <Button
+                                 variant="light"
+                                 // onClick={handleClose}
+                                 onClick={handleDeleteComment}
+                                 value={comment.id}
+                               >
+                                 Delete 
+                               </Button>
+                             </>
+                           ):(
+                             ""
+                           )}
                         </CardGroup>
                             </span>
                           </div>
