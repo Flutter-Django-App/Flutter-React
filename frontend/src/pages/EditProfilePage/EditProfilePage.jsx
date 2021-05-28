@@ -56,9 +56,9 @@ export default function EditProfilePage({ user, setUser }) {
     <>
       <h1>Edit Profile</h1>
 
-      <section className="_9eogI E3X2T">
-        <main className="SCxLW o64aR">
-          <div className="BcMHM EzUlV XfvCs">
+      <section className="ind-pg">
+        <main>
+          <div >
             {/* <ul className="wW1cu">
               <li>
                 <a className="h-aRd -HRM- " href="update" tabIndex="0">

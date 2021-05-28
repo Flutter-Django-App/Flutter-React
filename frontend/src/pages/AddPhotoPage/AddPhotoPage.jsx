@@ -74,7 +74,7 @@ export default function AddPhotoPage({user}) {
   }
 
   return (
-    <div className="add-photo">
+    <div className="add-photo ind-pg">
       <h1>Add Photo</h1>
       <Form onSubmit={handleSubmit}>
 

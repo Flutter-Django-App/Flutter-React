@@ -183,18 +183,15 @@ export default function UserProfilePage({ user, profilePhoto }) {
         </div>
         {photos.map((photo) => (
           
-          <Row>
+          <section className="index-pg ind-pg">
+            <div className="ind-div">
+              <Row>
             {photo.user.id === user.id ? (
-              
-              <Card className="my-3 p-3 rounded">
+              <div className=" \flex-box">
                 <Card.Body as="div">
                   <Card.Title as="div">
                     <Row>
-                      <Col>
                         <strong>{photo.user.username}</strong>
-                      </Col>
-                      <Col></Col>
-                      <Col>{photo.id}</Col>
                       <Col>
                         <CardGroup>
                           <Button variant="contained" onClick={handleShow} value={photo.id}>
@@ -269,11 +266,13 @@ export default function UserProfilePage({ user, profilePhoto }) {
                     </div>
                   </Card.Text>
                 </Card.Body>
-              </Card>
+              </div>
             ) : (
               console.log("bye bye photo")
             )}
-          </Row>
+            </Row>
+            </div>
+          </section>
         ))}
       </main>
     </>
