@@ -6,7 +6,7 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 export default function IndexPage({ user }) {
-  // const [allUsers, setAllUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   // const [comments, setComments] = useState([]);
   // const [likedPhotoId, setLikedPhotoId] = useState([]);
   // const [likes, setLikes] = useState([]);
@@ -104,20 +104,20 @@ export default function IndexPage({ user }) {
   // console.log(user)
   console.log(photos)
 
-  // console.log(allUsers)
-  // useEffect(() => {
-  //   async function fetchAllUsers() {
-  //     const { data } = await axios.get("/allusers/");
-  //     setAllUsers(data);
-  //     console.log(allUsers)
-  //   }
-  //   fetchAllUsers();
-  // }, []);
-  // useEffect(() => {
-  // 	// This is listening for each time puppies state is changed,
-  // 	// then will run our function below to reroute
-  // 	history.push("/photos");
-  // }, [newComment, history]);
+  useEffect(() => {
+    async function fetchAllUsers() {
+      const options = {
+        url: `http://localhost:8000/allusers/`,
+        method: "GET",
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+      }
+      const response = await axios(options);
+      setAllUsers(response.data);
+    }
+    fetchAllUsers();
+  }, []);
 
   const handleLike = async (e) => {
     console.log(e.target.value);
@@ -150,6 +150,8 @@ export default function IndexPage({ user }) {
   // console.log(likes);
   // console.log(formData);
   // console.log(photos)
+  // console.log(allUsers.find(element => element=1).username)
+
   return (
     <section className="index-pg ind-pg">
       {/* <h1>Photos Index Page</h1> */}
@@ -327,7 +329,14 @@ export default function IndexPage({ user }) {
                         {comment.photo === photo.id ? (
                           <div className="my-3">
                             <span>
-                              <strong>{comment.user}</strong> {comment.comment}{" "}
+                              <strong>
+                                {
+                                  allUsers.find(
+                                    (element) => (element = `${comment.user}`)
+                                  ).username
+                                }
+                              </strong>
+                              {comment.comment}{" "}
                               <CardGroup>
                           <Button variant="contained" onClick={handleShow} value={comment.id}>
                             <svg
