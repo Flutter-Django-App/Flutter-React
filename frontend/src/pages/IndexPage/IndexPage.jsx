@@ -276,7 +276,6 @@ export default function IndexPage({ user }) {
                       color="primary"
                       onClick={handleLike}
                       value={photo.id}
-                      ƒ
                     >
                       <a class="wpO6b  " type="submit">
                         <svg
