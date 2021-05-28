@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class SignupForm extends React.Component {
   state = {
@@ -67,7 +68,7 @@ class SignupForm extends React.Component {
         </div>
         <div className="gr27e">
         <div className="bot-div log-bot bottom-div bottom-log sign-bot">
-        <p className="bot-p">Already have an account? <a href="/login/">Login</a></p>
+        <p className="bot-p">Already have an account? <Link to="/login">Login</Link></p>
         </div>
       </div>  
       </article>
