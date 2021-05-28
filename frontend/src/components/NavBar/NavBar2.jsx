@@ -82,9 +82,9 @@ export default function NavBar2({ logged_in, handle_logout }) {
                               <Nav.Link>
                                 <img
                                   className="icons"
-                                  src="image"
+                                  src="https://i.imgur.com/nmYlsec.png"
                                   to="/profile/"
-                                  height="30px" width="30px"
+                                  height="30px" width="36px"
                                 />
                               </Nav.Link>
                             </LinkContainer>

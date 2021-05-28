@@ -154,9 +154,7 @@ export default function IndexPage({ user }) {
 
   return (
     <section className="index-pg ind-pg">
-      {/* <h1>Photos Index Page</h1> */}
       <div className="ind-div">
-        {/* <h1>Photos Index Page</h1> */}
         <Row>
           {photos.map((photo) => (
             <CardGroup>
@@ -196,7 +194,7 @@ export default function IndexPage({ user }) {
                           </a>
                         </Button>
 
-                        <Button
+                        {/* <Button
                           variant="contained"
                           type="submit"
                           color="primary"
@@ -217,7 +215,7 @@ export default function IndexPage({ user }) {
                               </svg>
                             </>
                           </a>
-                        </Button>
+                        </Button> */}
                       </>
                     ))}
 
@@ -291,7 +289,7 @@ export default function IndexPage({ user }) {
                       </a>
                     </Button>
 
-                    <Button
+                    {/* <Button
                       variant="contained"
                       type="submit"
                       color="primary"
@@ -310,7 +308,7 @@ export default function IndexPage({ user }) {
                           <path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"></path>
                         </svg>
                       </a>
-                    </Button>
+                    </Button> */}
                   </Form>
                   <Card.Text as="div">
                     <div className="my-3">

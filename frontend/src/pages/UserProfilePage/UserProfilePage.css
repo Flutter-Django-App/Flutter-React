@@ -1,4 +1,4 @@
-div {
+/* div {
     -webkit-box-align: stretch;
     -webkit-align-items: stretch;
     -ms-flex-align: stretch;
@@ -23,6 +23,31 @@ div {
     position: relative;
     font: inherit;
     vertical-align: baseline;
+} */
+
+div {
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    border: 0 solid #000;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
 
 header {
@@ -238,4 +263,14 @@ h1 {
 .btn-3 {
     -webkit-box-align: stretch;
     align-items: stretch;
+}
+
+.index-pg-1 ind-pg-1 {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    margin: 0 auto;
+    max-width: 600px;
+    position: relative;
+    width: 100%;
+    padding-top: 70px;
 }
