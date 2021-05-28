@@ -25,21 +25,21 @@ export default function IndexPage({ user }) {
 	// 	history.push("/photos/");
 	// }, [photos, history]);
 
-  useEffect(() => {
-    async function fetchPhotos() {
-      const options = {
-        url: `http://localhost:8000/photos/`,
-        method: "GET",
-        headers: {
-          Authorization: `JWT ${localStorage.getItem("token")}`,
-        },
-      }
-      const response = await axios(options);
-      setPhotos(response.data);
-      history.push("/photos/");
-    }
-    fetchPhotos();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchPhotos() {
+  //     const options = {
+  //       url: `http://localhost:8000/photos/`,
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `JWT ${localStorage.getItem("token")}`,
+  //       },
+  //     }
+  //     const response = await axios(options);
+  //     setPhotos(response.data);
+  //     history.push("/photos/");
+  //   }
+  //   fetchPhotos();
+  // }, []);
 
   const handleNewCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -113,11 +113,37 @@ export default function IndexPage({ user }) {
           Authorization: `JWT ${localStorage.getItem("token")}`,
         },
       }
-      const response = await axios(options);
-      setAllUsers(response.data);
-    }
+      try {
+        const allUsers = await axios(options).then((response) => {
+          console.log("Response for submission=>", response);
+          setAllUsers(response.data);
+        });
+
+      } catch {
+        console.log("bleh");
+      }
+      // history.push("/");
+    };
     fetchAllUsers();
   }, []);
+
+  useEffect(() => {
+    async function fetchPhotos() {
+      const options = {
+        url: `http://localhost:8000/photos/`,
+        method: "GET",
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+      }
+      const response = await axios(options);
+      setPhotos(response.data);
+      history.push("/photos/");
+    }
+    fetchPhotos();
+  }, []);
+
+ 
 
   const handleLike = async (e) => {
     console.log(e.target.value);
