@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./IndexPage.css";
-import { Row,  Card, CardGroup } from "react-bootstrap";
+import { Row, Card, CardGroup, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Form, Button, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
@@ -16,14 +16,20 @@ export default function IndexPage({ user }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setShow(true);
-  }
+  };
+  const [showLikes, setShowLikes] = useState(false);
+  const handleCloseLikes = () => setShowLikes(false);
+  const handleShowLikes = (e) => {
+    console.log(e.target.value);
+    setShowLikes(true);
+  };
   const history = useHistory();
 
-	// useEffect(() => {
-	// 	history.push("/photos/");
-	// }, [photos, history]);
+  // useEffect(() => {
+  // 	history.push("/photos/");
+  // }, [photos, history]);
 
   // useEffect(() => {
   //   async function fetchPhotos() {
@@ -81,7 +87,7 @@ export default function IndexPage({ user }) {
 
   const handleDeleteComment = async (e) => {
     e.preventDefault();
-    console.log(e.target.value)
+    console.log(e.target.value);
     const options = {
       url: `http://localhost:8000/comments/${e.target.value}/delete_comment/`, // maybe wrong
       method: "DELETE",
@@ -94,15 +100,15 @@ export default function IndexPage({ user }) {
     };
     try {
       const photos = await axios(options).then((response) => {
-        console.log('Response for submission=>', response);
+        console.log("Response for submission=>", response);
       });
     } catch {
-      console.log('bleh')
+      console.log("bleh");
     }
     history.push("/");
-  }
+  };
   // console.log(user)
-  console.log(photos)
+  console.log(photos);
 
   useEffect(() => {
     async function fetchAllUsers() {
@@ -112,18 +118,17 @@ export default function IndexPage({ user }) {
         headers: {
           Authorization: `JWT ${localStorage.getItem("token")}`,
         },
-      }
+      };
       try {
         const allUsers = await axios(options).then((response) => {
           console.log("Response for submission=>", response);
           setAllUsers(response.data);
         });
-
       } catch {
         console.log("bleh");
       }
       // history.push("/");
-    };
+    }
     fetchAllUsers();
   }, []);
 
@@ -135,15 +140,13 @@ export default function IndexPage({ user }) {
         headers: {
           Authorization: `JWT ${localStorage.getItem("token")}`,
         },
-      }
+      };
       const response = await axios(options);
       setPhotos(response.data);
       history.push("/photos/");
     }
     fetchPhotos();
   }, []);
-
- 
 
   const handleLike = async (e) => {
     console.log(e.target.value);
@@ -339,13 +342,34 @@ export default function IndexPage({ user }) {
                   <Card.Text as="div">
                     <div className="my-3">
                       <span>
-                        <strong>{photo.user.username}</strong> {photo.caption} 
+                        <strong>{photo.user.username}</strong> {photo.caption}
                       </span>
                     </div>
                   </Card.Text>
                   <Card.Text as="div">
-                    <div className="my-3">Likes: {photo.likes.length}</div>
+                    <div className="my-3" onClick={handleShow} class="myDIV">
+                      Likes: {photo.likes.length}
+                    </div>
                   </Card.Text>
+
+                  <Modal show={show} onHide={handleClose} >
+                    <Modal.Header >
+                      <Modal.Title><strong>Likes</strong></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <img src={photo.url} /> 
+                      
+                        {photo.likes.map((like) => (
+                        <span><h2 id='likedusers' className="user-name name name1 name-profile">{
+                          allUsers.find(
+                            (element) => (element = `${like.user}`)
+                          ).username
+                        }</h2></span>
+                        ))}
+                        
+                    </Modal.Body>
+                    
+                  </Modal>
                   <Card.Text as="div">
                     {photo.comments.map((comment) => (
                       <>
@@ -361,57 +385,63 @@ export default function IndexPage({ user }) {
                               </strong>
                               {comment.comment}{" "}
                               <CardGroup>
-                          <Button variant="contained" onClick={handleShow} value={comment.id}>
-                            <svg
-                              aria-label="More options"
-                              className="_8-yf5 "
-                              fillRule="#262626"
-                              height="16"
-                              viewBox="0 0 48 48"
-                              width="16"
-                            >
-                              <circle
-                                clipRule="evenodd"
-                                cx="8"
-                                cy="24"
-                                fillRule="evenodd"
-                                r="4.5"
-                              ></circle>
-                              <circle
-                                clipRule="evenodd"
-                                cx="24"
-                                cy="24"
-                                fillRule="evenodd"
-                                r="4.5"
-                              ></circle>
-                              <circle
-                                clipRule="evenodd"
-                                cx="40"
-                                cy="24"
-                                fillRule="evenodd"
-                                r="4.5"
-                              ></circle>
-                            </svg>
-                          </Button>
-                          {show ? (
-                            
-                            <>
-                               <Button variant="contained" onClick={handleClose}>
-                                 Cancel 
-                               </Button>
-                               <Button
-                                 variant="light"
-                                 // onClick={handleClose}
-                                 onClick={handleDeleteComment}
-                                 value={comment.id}
-                               >
-                                 Delete 
-                               </Button>
-                             </>
-                           ):(
-                             ""
-                           )}
-                        </CardGroup>
+                                <Button
+                                  variant="contained"
+                                  onClick={handleShowLikes}
+                                  value={comment.id}
+                                >
+                                  <svg
+                                    aria-label="More options"
+                                    className="_8-yf5 "
+                                    fillRule="#262626"
+                                    height="16"
+                                    viewBox="0 0 48 48"
+                                    width="16"
+                                  >
+                                    <circle
+                                      clipRule="evenodd"
+                                      cx="8"
+                                      cy="24"
+                                      fillRule="evenodd"
+                                      r="4.5"
+                                    ></circle>
+                                    <circle
+                                      clipRule="evenodd"
+                                      cx="24"
+                                      cy="24"
+                                      fillRule="evenodd"
+                                      r="4.5"
+                                    ></circle>
+                                    <circle
+                                      clipRule="evenodd"
+                                      cx="40"
+                                      cy="24"
+                                      fillRule="evenodd"
+                                      r="4.5"
+                                    ></circle>
+                                  </svg>
+                                </Button>
+                                {showLikes ? (
+                                  <>
+                                    <Button
+                                      variant="contained"
+                                      onClick={handleClose}
+                                    >
+                                      Cancel
+                                    </Button>
+                                    <Button
+                                      variant="light"
+                                      // onClick={handleClose}
+                                      onClick={handleDeleteComment}
+                                      value={comment.id}
+                                    >
+                                      Delete
+                                    </Button>
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                              </CardGroup>
                             </span>
                           </div>
                         ) : (
