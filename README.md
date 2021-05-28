@@ -17,7 +17,7 @@
 -----------------------------------------------------------------------------------
 
 ## [Trello Board](https://trello.com/invite/b/9cidTfNZ/6979ceb496caf5f4ce661b6256e05d97/project-4)
-## [Pitch Deck](https://balsamiq.cloud/sun9l57/pdfmotg)
+## [Pitch Deck](https://docs.google.com/presentation/d/1B0Wg_JtIPLs462zRFYBsmoROfCJXjXetdqSwvHHeTDw/edit?usp=sharing)
 ## [Deploy App](https://flutter-social-network.herokuapp.com/)
 
 -----------------------------------------------------------------------------------
