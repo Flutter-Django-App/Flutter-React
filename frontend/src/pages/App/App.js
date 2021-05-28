@@ -245,7 +245,7 @@ export default function App() {
           <UserProfilePage logged_in={logged_in} user={user} profilePhoto={profilePhoto} /*allUsers={allUsers}*/ />
         </Route>
         <Route exact path="/profile/update">
-          <EditProfilePage logged_in={logged_in} user={user} />
+          <EditProfilePage logged_in={logged_in} user={user} setUser={setUser} />
         </Route>
         <Route exact path="/profile/photo">
           <AddProfilePhotoPage logged_in={logged_in} user={user} />
