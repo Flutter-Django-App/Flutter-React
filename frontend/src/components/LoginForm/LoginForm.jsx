@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './LoginForm.css'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class LoginForm extends React.Component {
   state = {
@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
       </div>
       <div className="gr27e">
         <div className="bot-div log-bot bottom-div bottom-log sign-bot">
-        <p className="bot-p">Don't have an account? <a href="/signup/">Sign Up</a></p>
+        <p className="bot-p">Don't have an account? <Link to="/signup">Sign Up</Link></p>
         </div>
       </div>
       </article>
