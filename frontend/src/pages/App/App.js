@@ -96,7 +96,6 @@ export default function App() {
       const response = await axios(options);
       setProfilePhoto(response.data);
       console.log(profilePhoto)
-      history.push("/");
     }
     fetchProfilePhotos();
   }, []);
@@ -225,7 +224,7 @@ export default function App() {
   return (
     <Router>
       <NavBar2 logged_in={logged_in} handle_logout={handle_logout} />
-      <Container>
+      <Container id="window">
         
         <Route exact path="/">
           {!logged_in ? (
