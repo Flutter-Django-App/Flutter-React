@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { BrowserRouter as Router, Redirect, Route, useHistory } from "react-router-dom";
+import { HashRouter as Router, Redirect, Route, useHistory } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 
@@ -77,7 +77,7 @@ export default function App() {
         setUser(user)
         
       } else {
-        history.push('/login')
+        history.push('/')
       }
       
     }
