@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./IndexPage.css";
-import { Row, Card, CardGroup, ListGroup, ListGroupItem } from "react-bootstrap";
+import {
+  Row,
+  Card,
+  CardGroup,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 import { Form, Button, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import LikeButton from './../../components/LikeButton/LikeButton'
+import LikeButton from "./../../components/LikeButton/LikeButton";
+import SaveButton from "./../../components/SaveButton/SaveButton";
+import CommentButton from "./../../components/CommentButton/CommentButton";
 export default function IndexPage({ user }) {
   const [allUsers, setAllUsers] = useState([]);
   // const [comments, setComments] = useState([]);
@@ -197,85 +205,31 @@ export default function IndexPage({ user }) {
                     <img src={photo.url} />
                   </Card.Text>
 
-                  <Form onSubmit={handleLike}>
-                    
-                    <LikeButton
-                      // isLiked={isLiked}
-                      // setIsLiked={setIsLiked}
-                      user={user}
-                      photo_id={photo.id}
-                      photo={photo}
-                    />
-                        
-
-                    <Button
-                      variant="contained"
-                      disabled={!newComment}
-                      type="submit"
-                      color="primary"
-                      onClick={handleSubmit}
-                      value={photo.id}
-                      name={photo.id}
-                    >
-                      <a class="wpO6b  " type="submit">
-                        <svg
-                          aria-label="Comment"
-                          class="_8-yf5 "
-                          fill="#262626"
-                          height="24"
-                          viewBox="0 0 48 48"
-                          width="24"
-                        >
-                          <path
-                            clipRule="evenodd"
-                            d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
-                            fillRule="evenodd"
-                          ></path>
-                        </svg>
-                      </a>
-                    </Button>
-                  
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      color="primary"
-                      onClick={handleLike}
-                      value={photo.id}
-                    >
-                      <a class="wpO6b  " type="submit">
-                        <svg
-                          aria-label="Save"
-                          class="_8-yf5 "
-                          fill="#262626"
-                          height="24"
-                          viewBox="0 0 48 48"
-                          width="24"
-                        >
-                          <path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 29 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1zM24 26c.8 0 1.6.3 2.2.9l15.8 16V3H6v39.9l15.8-16c.6-.6 1.4-.9 2.2-.9z"></path>
-                        </svg>
-                      </a>
-                    </Button>
-
-                    {/* <Button
-                      variant="contained"
-                      type="submit"
-                      color="primary"
-                      onClick={handleLike}
-                      value={photo.id}
-                    >
-                      <a class="wpO6b  " type="submit">
-                        <svg
-                          aria-label="Remove"
-                          class="_8-yf5 "
-                          fill="#262626"
-                          height="24"
-                          viewBox="0 0 48 48"
-                          width="24"
-                        >
-                          <path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"></path>
-                        </svg>
-                      </a>
-                    </Button> */}
+                  <Form as='div' onSubmit={handleLike} class="flexbox-container">
+                      <LikeButton
+                        // isLiked={isLiked}
+                        // setIsLiked={setIsLiked}
+                        user={user}
+                        photo_id={photo.id}
+                        photo={photo}
+                      />
+                      <CommentButton
+                        // isCommented={isCommented}
+                        // setIsCommented={setIsCommented}
+                        user={user}
+                        photo_id={photo.id}
+                        photo={photo}
+                        handleNewCommentChange={handleNewCommentChange}
+                        handleKeyUp={handleKeyUp}
+                        handleSubmit={handleSubmit}
+                      />
+                      <SaveButton
+                        // isSaved={isSaved}
+                        // setIsSaved={setIsSaved}
+                        user={user}
+                        photo_id={photo.id}
+                        photo={photo}
+                      />
                   </Form>
                   <Card.Text as="div">
                     <div className="my-3">
@@ -290,23 +244,30 @@ export default function IndexPage({ user }) {
                     </div>
                   </Card.Text>
 
-                  <Modal show={show} onHide={handleClose} >
-                    <Modal.Header >
-                      <Modal.Title><strong>Likes</strong></Modal.Title>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header>
+                      <Modal.Title>
+                        <strong>Likes</strong>
+                      </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <img src={photo.url} /> 
-                      
-                        {photo.likes.map((like) => (
-                        <span><h2 id='likedusers' className="user-name name name1 name-profile">{
-                          allUsers.find(
-                            (element) => (element = `${like.user}`)
-                          ).username
-                        }</h2></span>
-                        ))}
-                        
+                      <img src={photo.url} />
+
+                      {photo.likes.map((like) => (
+                        <span>
+                          <h2
+                            id="likedusers"
+                            className="user-name name name1 name-profile"
+                          >
+                            {
+                              allUsers.find(
+                                (element) => (element = `${like.user}`)
+                              ).username
+                            }
+                          </h2>
+                        </span>
+                      ))}
                     </Modal.Body>
-                    
                   </Modal>
                   <Card.Text as="div">
                     {photo.comments.map((comment) => (
