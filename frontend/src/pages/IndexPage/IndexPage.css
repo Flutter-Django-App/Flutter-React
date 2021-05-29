@@ -61,3 +61,8 @@ div {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+#likedusers {
+    margin: 10px;
+    align-items: center;
+}
