@@ -9,26 +9,25 @@ import {
   RiImageAddFill,
   RiLogoutBoxRLine,
 } from "react-icons/all";
-import {FaArrowCircleUp} from 'react-icons/fa';
+import { FaArrowCircleUp } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 
-
 export default function NavBar2({ logged_in, handle_logout }) {
-  const [showScroll, setShowScroll] = useState(false)
+  const [showScroll, setShowScroll] = useState(false);
 
   const checkScrollTop = () => {
-    if (!showScroll && window.pageYOffset > 400){
-      setShowScroll(true)
-    } else if (showScroll && window.pageYOffset <= 400){
-      setShowScroll(false)
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
     }
   };
 
-  const scrollTop = () =>{
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  window.addEventListener('scroll', checkScrollTop)
+  window.addEventListener("scroll", checkScrollTop);
 
   return (
     <div>
@@ -37,21 +36,20 @@ export default function NavBar2({ logged_in, handle_logout }) {
           <div className="nav-b2 nav-bar2">
             <div className="nav-bar nav-b">
               <div className="nav-3">
-                  <div className="nav-4">
-                    <div className="nav-5" >
-                      <span>
+                <div className="nav-4">
+                  <div className="nav-5">
+                    <span>
                       <img
                         className="nav-logo"
                         src="https://i.imgur.com/bfjUjgq.png"
                         width="140px"
                         height="40px"
-                        className="scrollTop" onClick={scrollTop} 
+                        className="scrollTop"
+                        onClick={scrollTop}
                       />
-
-                
-                </span>
-                    </div>
+                    </span>
                   </div>
+                </div>
               </div>
               <div className="nav-6">
                 <Navbar>
@@ -61,17 +59,24 @@ export default function NavBar2({ logged_in, handle_logout }) {
                         <div className="icon-div">
                           <LinkContainer to="/photos">
                             <Nav.Link>
-                              <img src="https://i.imgur.com/CaEnz7X.png" height="30px" width="30px" />
+                              <img
+                                src="https://i.imgur.com/CaEnz7X.png"
+                                height="30px"
+                                width="30px"
+                              />
                             </Nav.Link>
                           </LinkContainer>
                         </div>
-                        <div className="icon-div" >
-                          <div >
+                        <div className="icon-div">
+                          <div>
                             <LinkContainer to="/photos/create">
                               <Nav.Link>
-                              <img 
-                              className="icons"
-                              src="https://i.imgur.com/HrDkVxj.png" height="30px" width="30px" />
+                                <img
+                                  className="icons"
+                                  src="https://i.imgur.com/HrDkVxj.png"
+                                  height="30px"
+                                  width="30px"
+                                />
                               </Nav.Link>
                             </LinkContainer>
                           </div>
@@ -84,7 +89,8 @@ export default function NavBar2({ logged_in, handle_logout }) {
                                   className="icons"
                                   src="https://i.imgur.com/nmYlsec.png"
                                   to="/profile/"
-                                  height="30px" width="36px"
+                                  height="30px"
+                                  width="36px"
                                 />
                               </Nav.Link>
                             </LinkContainer>
@@ -94,7 +100,12 @@ export default function NavBar2({ logged_in, handle_logout }) {
                           <div>
                             <LinkContainer to="/login">
                               <Nav.Link onClick={handle_logout}>
-                              <img className="profile-pic icons" src="https://i.imgur.com/z9msD3g.png?1" height="30px" width="30px"/>
+                                <img
+                                  className="profile-pic icons"
+                                  src="https://i.imgur.com/z9msD3g.png?1"
+                                  height="30px"
+                                  width="30px"
+                                />
                               </Nav.Link>
                             </LinkContainer>
                           </div>
