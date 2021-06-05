@@ -54,7 +54,6 @@ export default function LikeButton({ user, photo_id, photo }) {
     <>
       {isLiked ? (
         <>
-          <Form onSubmit={handleLike}>
             <Button
               variant="contained"
               type="submit"
@@ -77,7 +76,6 @@ export default function LikeButton({ user, photo_id, photo }) {
                 </>
               </a>
             </Button>
-          </Form>
         </>
       ) : (
         <>
