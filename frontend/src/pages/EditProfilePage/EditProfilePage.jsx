@@ -31,14 +31,13 @@ export default function EditProfilePage({ user, setUser }) {
         first_name: formData.first_name,
         last_name: formData.last_name,
         email: formData.email,
-      }
-    }
+      },
+    };
     try {
       const updated_profile = await axios(options);
-      console.log(updated_profile.data);
-      setUser(updated_profile.data)
+      setUser(updated_profile.data);
     } catch (err) {
-      console.log('Failed to Update');
+      console.log("Failed to Update");
     }
     history.push("/profile");
   };
@@ -47,8 +46,6 @@ export default function EditProfilePage({ user, setUser }) {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-      // [e.target.first_name]: e.target.value,
-      // [e.target.first_name]: e.target.value,
     });
   };
 
@@ -58,26 +55,8 @@ export default function EditProfilePage({ user, setUser }) {
 
       <section className="ind-pg">
         <main>
-          <div >
-            {/* <ul className="wW1cu">
-              <li>
-                <a className="h-aRd -HRM- " href="update" tabIndex="0">
-                  Edit Profile
-                </a>
-              </li>
-              <li>
-                <a
-                  className="h-aRd  fuQUr"
-                  href="/profile/password/change/"
-                  tabIndex="0"
-                >
-                  Change Password
-                </a>
-              </li>
-            </ul> */}
-
+          <div>
             <Form ref={formRef} autoComplete="off" onSubmit={handleSubmit}>
-              {/* <h1>{user.username}</h1> */}
               <div className="form-group">
                 <label>Username </label>
                 <input

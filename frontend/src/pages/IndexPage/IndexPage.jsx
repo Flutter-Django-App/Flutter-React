@@ -10,50 +10,26 @@ import {
 } from "react-bootstrap";
 import { Form, Button, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+
 import LikeButton from "./../../components/LikeButton/LikeButton";
 import SaveButton from "./../../components/SaveButton/SaveButton";
 import CommentButton from "./../../components/CommentButton/CommentButton";
+
 export default function IndexPage({ user }) {
   const [allUsers, setAllUsers] = useState([]);
-  // const [comments, setComments] = useState([]);
-  // const [likedPhotoId, setLikedPhotoId] = useState([]);
-  // const [likes, setLikes] = useState([]);
-  // const [formData, setFormData] = useState({comment: ""});
   const [photos, setPhotos] = useState([]);
   const [newComment, setNewComment] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
-    console.log(e.target.value);
     setShow(true);
   };
   const [showLikes, setShowLikes] = useState(false);
   const handleCloseLikes = () => setShowLikes(false);
   const handleShowLikes = (e) => {
-    console.log(e.target.value);
     setShowLikes(true);
   };
   const history = useHistory();
-
-  // useEffect(() => {
-  // 	history.push("/photos/");
-  // }, [photos, history]);
-
-  // useEffect(() => {
-  //   async function fetchPhotos() {
-  //     const options = {
-  //       url: `http://localhost:8000/photos/`,
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `JWT ${localStorage.getItem("token")}`,
-  //       },
-  //     }
-  //     const response = await axios(options);
-  //     setPhotos(response.data);
-  //     history.push("/photos/");
-  //   }
-  //   fetchPhotos();
-  // }, []);
 
   const handleNewCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -69,7 +45,6 @@ export default function IndexPage({ user }) {
 
   const handleSubmit = async (e) => {
     const photo_id = e.target.value;
-    console.log(photo_id);
     e.preventDefault();
     const options = {
       url: `http://localhost:8000/comments/${user.id}/create/${photo_id}/`,
@@ -95,9 +70,8 @@ export default function IndexPage({ user }) {
 
   const handleDeleteComment = async (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     const options = {
-      url: `http://localhost:8000/comments/${e.target.value}/delete_comment/`, // maybe wrong
+      url: `http://localhost:8000/comments/${e.target.value}/delete_comment/`,
       method: "DELETE",
       headers: {
         Authorization: `JWT ${localStorage.getItem("token")}`,
@@ -115,8 +89,6 @@ export default function IndexPage({ user }) {
     }
     history.push("/");
   };
-  // console.log(user)
-  console.log(photos);
 
   useEffect(() => {
     async function fetchAllUsers() {
@@ -135,7 +107,6 @@ export default function IndexPage({ user }) {
       } catch {
         console.log("bleh");
       }
-      // history.push("/");
     }
     fetchAllUsers();
   }, []);
@@ -157,8 +128,6 @@ export default function IndexPage({ user }) {
   }, []);
 
   const handleLike = async (e) => {
-    console.log(e.target.value);
-    console.log(user);
     const photo_id = e.target.value;
     e.preventDefault();
     const options = {
@@ -181,13 +150,6 @@ export default function IndexPage({ user }) {
     }
     history.push("/");
   };
-  // console.log(photos);
-  // console.log(user);
-  // console.log(comments);
-  // console.log(likes);
-  // console.log(formData);
-  // console.log(photos)
-  // console.log(allUsers.find(element => element=1).username)
 
   return (
     <section className="index-pg ind-pg">
@@ -205,31 +167,21 @@ export default function IndexPage({ user }) {
                     <img src={photo.url} />
                   </Card.Text>
 
-                  <Form as='div' onSubmit={handleLike} class="flexbox-container">
-                      <LikeButton
-                        // isLiked={isLiked}
-                        // setIsLiked={setIsLiked}
-                        user={user}
-                        photo_id={photo.id}
-                        photo={photo}
-                      />
-                      <CommentButton
-                        // isCommented={isCommented}
-                        // setIsCommented={setIsCommented}
-                        user={user}
-                        photo_id={photo.id}
-                        photo={photo}
-                        handleNewCommentChange={handleNewCommentChange}
-                        handleKeyUp={handleKeyUp}
-                        handleSubmit={handleSubmit}
-                      />
-                      <SaveButton
-                        // isSaved={isSaved}
-                        // setIsSaved={setIsSaved}
-                        user={user}
-                        photo_id={photo.id}
-                        photo={photo}
-                      />
+                  <Form
+                    as="div"
+                    onSubmit={handleLike}
+                    class="flexbox-container"
+                  >
+                    <LikeButton user={user} photo_id={photo.id} photo={photo} />
+                    <CommentButton
+                      user={user}
+                      photo_id={photo.id}
+                      photo={photo}
+                      handleNewCommentChange={handleNewCommentChange}
+                      handleKeyUp={handleKeyUp}
+                      handleSubmit={handleSubmit}
+                    />
+                    <SaveButton user={user} photo_id={photo.id} photo={photo} />
                   </Form>
                   <Card.Text as="div">
                     <div className="my-3">
@@ -330,7 +282,6 @@ export default function IndexPage({ user }) {
                                     </Button>
                                     <Button
                                       variant="light"
-                                      // onClick={handleClose}
                                       onClick={handleDeleteComment}
                                       value={comment.id}
                                     >
@@ -353,7 +304,6 @@ export default function IndexPage({ user }) {
                     <div className="comment-sec">
                       <Form className="form-com" onSubmit={handleSubmit}>
                         <Form.Group>
-                          {/* <strong>{photo.user}</strong> */}
                           <Form.Control
                             type="text"
                             placeholder="Enter Comment"

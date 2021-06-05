@@ -9,41 +9,35 @@ import CommentButton from "../components/CommentButton/CommentButton";
 import SaveButton from "../components/SaveButton/SaveButton";
 
 export default function PhotoFeedItem({ photo, comments }) {
-    
   return (
-      <Card className="my-3 p-3 rounded">
-        <Card.Body as="div">
-          <Card.Title as="div">
-            <strong>{photo.user}</strong>
-          </Card.Title>
-          <Card.Text as="div">
-            <div className="my-3">{photo.location}</div>
-          </Card.Text>
-          <Card.Text as="div">
-            <div className="my-3">
-              <strong>Img URL: </strong>
-              {photo.url}
-            </div>
-          </Card.Text>
-         {/* <Row>
-           <LikeButton /><CommentButton /><SaveButton />
-         </Row> */}
-          <Card.Text as="div">
-            <div className="my-3">
-              Likes: {photo.total_likes}
-            </div>
-          </Card.Text>
-          <Card.Text as="div">
-            <div className="my-3"><span><strong>{photo.user}</strong>   {photo.caption}</span></div>
-          </Card.Text>
-          <Card.Text as="div">
-            <div className="my-3">
-              Comments: {comments}
-            </div>
-          </Card.Text>
-        </Card.Body>
-      </Card>
-
-      
+    <Card className="my-3 p-3 rounded">
+      <Card.Body as="div">
+        <Card.Title as="div">
+          <strong>{photo.user}</strong>
+        </Card.Title>
+        <Card.Text as="div">
+          <div className="my-3">{photo.location}</div>
+        </Card.Text>
+        <Card.Text as="div">
+          <div className="my-3">
+            <strong>Img URL: </strong>
+            {photo.url}
+          </div>
+        </Card.Text>
+        <Card.Text as="div">
+          <div className="my-3">Likes: {photo.total_likes}</div>
+        </Card.Text>
+        <Card.Text as="div">
+          <div className="my-3">
+            <span>
+              <strong>{photo.user}</strong> {photo.caption}
+            </span>
+          </div>
+        </Card.Text>
+        <Card.Text as="div">
+          <div className="my-3">Comments: {comments}</div>
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 }

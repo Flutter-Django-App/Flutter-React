@@ -16,7 +16,6 @@ export default function LikeButton({ user, photo_id, photo }) {
 
   useEffect(() => {
     async function getLikes() {
-      console.log("hitting");
       if (!photo.likes.length) {
         console.log("no likes");
       } else {
@@ -24,15 +23,11 @@ export default function LikeButton({ user, photo_id, photo }) {
           like.user === user.id ? setIsLiked(true) : setIsLiked(false)
         );
       }
-      console.log(isLiked);
     }
     getLikes();
   });
 
   const handleLike = async (e) => {
-    console.log(e.target.value);
-    console.log(user);
-    // const photo_id = e.target.value;
     e.preventDefault();
     const options = {
       url: `http://localhost:8000/likes/${user.id}/create/${photo_id}/`,
