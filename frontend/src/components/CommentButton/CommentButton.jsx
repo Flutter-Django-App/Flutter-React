@@ -25,7 +25,7 @@ export default function CommentButton({
   useEffect(() => {
     async function getCommentedPhotos() {
       if (!photo.comments.length) {
-        console.log("no comments");
+        return
       } else {
         photo.comments.map((like) =>
           like.user === user.id ? setIsCommented(true) : setIsCommented(false)

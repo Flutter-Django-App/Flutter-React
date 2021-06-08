@@ -26,7 +26,7 @@ export default function App() {
   );
   const [user, setUser] = useState([]);
   const history = useHistory();
-  const [profilePhoto, setProfilePhoto] = useState("Add a Profile Picure!");
+  const [profilePhoto, setProfilePhoto] = useState([]);
 
   useEffect(() => {
     async function fetchUser() {
@@ -42,6 +42,7 @@ export default function App() {
         const res = await axios(options);
         const user = res.data;
         setUser(user);
+        // console.log(user)
       } else {
         history.push("/");
       }
@@ -59,9 +60,11 @@ export default function App() {
         },
       };
       const response = await axios(options);
+      console.log(response.data)
       setProfilePhoto(response.data);
     }
     fetchProfilePhotos();
+    console.log(profilePhoto)
   }, []);
 
   const handle_login = async (e, formData) => {
@@ -141,7 +144,7 @@ export default function App() {
           {!logged_in ? (
             <LoginForm handle_login={handle_login} />
           ) : (
-            <IndexPage logged_in={logged_in} user={user} />
+            <IndexPage logged_in={logged_in} user={user} profilePhoto={profilePhoto} />
           )}
         </Route>
         <Route exact path="/photos">

@@ -15,7 +15,7 @@ import LikeButton from "./../../components/LikeButton/LikeButton";
 import SaveButton from "./../../components/SaveButton/SaveButton";
 import CommentButton from "./../../components/CommentButton/CommentButton";
 
-export default function IndexPage({ user }) {
+export default function IndexPage({ user, profilephoto }) {
   const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [newComment, setNewComment] = useState([]);
@@ -101,7 +101,7 @@ export default function IndexPage({ user }) {
       };
       try {
         const allUsers = await axios(options).then((response) => {
-          console.log("Response for submission=>", response);
+          console.log("Response for allUsers=>", response);
           setAllUsers(response.data);
         });
       } catch {
@@ -121,6 +121,7 @@ export default function IndexPage({ user }) {
         },
       };
       const response = await axios(options);
+      console.log(response.data)
       setPhotos(response.data);
       history.push("/photos/");
     }
@@ -150,7 +151,7 @@ export default function IndexPage({ user }) {
     }
     history.push("/");
   };
-
+console.log(profilephoto)
   return (
     <section className="index-pg ind-pg">
       <div className="ind-div">

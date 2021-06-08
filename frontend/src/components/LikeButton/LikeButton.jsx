@@ -17,7 +17,7 @@ export default function LikeButton({ user, photo_id, photo }) {
   useEffect(() => {
     async function getLikes() {
       if (!photo.likes.length) {
-        console.log("no likes");
+        return
       } else {
         photo.likes.map((like) =>
           like.user === user.id ? setIsLiked(true) : setIsLiked(false)
