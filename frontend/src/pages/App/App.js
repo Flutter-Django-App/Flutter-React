@@ -42,7 +42,6 @@ export default function App() {
         const res = await axios(options);
         const user = res.data;
         setUser(user);
-        // console.log(user)
       } else {
         history.push("/");
       }
@@ -60,11 +59,9 @@ export default function App() {
         },
       };
       const response = await axios(options);
-      console.log(response.data)
       setProfilePhoto(response.data);
     }
     fetchProfilePhotos();
-    console.log(profilePhoto)
   }, []);
 
   const handle_login = async (e, formData) => {
@@ -148,7 +145,7 @@ export default function App() {
           )}
         </Route>
         <Route exact path="/photos">
-          <IndexPage logged_in={logged_in} user={user} />
+          <IndexPage logged_in={logged_in} user={user} profilePhoto={profilePhoto} />
         </Route>
         <Route exact path="/photos/create">
           <AddPhotoPage logged_in={logged_in} user={user} />
@@ -165,10 +162,11 @@ export default function App() {
             logged_in={logged_in}
             user={user}
             setUser={setUser}
+            profilePhoto={profilePhoto}
           />
         </Route>
         <Route exact path="/profile/photo">
-          <AddProfilePhotoPage logged_in={logged_in} user={user} />
+          <AddProfilePhotoPage logged_in={logged_in} user={user} profilePhoto={profilePhoto} />
         </Route>
         <Route exact path="/signup">
           <SignUpForm handle_signup={handle_signup} />

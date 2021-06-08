@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import axios from "axios";
 import "./UserProfilePage.css";
-import { Row, Col, Card, CardGroup, Modal, Button } from "react-bootstrap";
+import { Row, Col, Card, CardGroup, Modal, Button, Container } from "react-bootstrap";
 
 export default function UserProfilePage({ user, profilePhoto }) {
   const [photos, setPhotos] = useState([]);
@@ -68,8 +68,24 @@ export default function UserProfilePage({ user, profilePhoto }) {
                   </div>
                 </div>
                 <section className="profile-sec">
-                  <div className="profile-div-1">
+                  <div className="profile-div-1" >
+                    <Container>
+                    <Row>
+                      <Col>
                     <Card.Body>
+                    <Card.Text as="div">
+                      {profilePhoto.map((profilephoto) => (
+                        <>
+                        {profilephoto.user.id===user.id ? (
+                          <img className="profilephoto" src={profilephoto.image_url} />
+                        ) : ("")}
+                        </>
+                      ))}
+                  </Card.Text>
+                  </Card.Body>
+                  </Col>
+                  <Col>
+                  <Card.Body>
                       <Card.Title>
                         <h2 className="user-name name name1 name-profile">
                           {user.username}
@@ -112,6 +128,9 @@ export default function UserProfilePage({ user, profilePhoto }) {
                         </Card.Link>
                       </div>
                     </Card.Body>
+                    </Col>
+                    </Row>
+                  </Container>
                   </div>
                 </section>
                 <Card.Footer>

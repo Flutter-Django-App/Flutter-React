@@ -15,7 +15,7 @@ import LikeButton from "./../../components/LikeButton/LikeButton";
 import SaveButton from "./../../components/SaveButton/SaveButton";
 import CommentButton from "./../../components/CommentButton/CommentButton";
 
-export default function IndexPage({ user, profilephoto }) {
+export default function IndexPage({ user, profilePhoto }) {
   const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [newComment, setNewComment] = useState([]);
@@ -121,7 +121,6 @@ export default function IndexPage({ user, profilephoto }) {
         },
       };
       const response = await axios(options);
-      console.log(response.data)
       setPhotos(response.data);
       history.push("/photos/");
     }
@@ -151,7 +150,6 @@ export default function IndexPage({ user, profilephoto }) {
     }
     history.push("/");
   };
-console.log(profilephoto)
   return (
     <section className="index-pg ind-pg">
       <div className="ind-div">
@@ -160,6 +158,15 @@ console.log(profilephoto)
             <CardGroup>
               <Card className="my-3 p-3 rounded">
                 <Card.Body as="div">
+                  <Card.Text as="div">
+                      {profilePhoto.map((profilephoto) => (
+                        <>
+                        {profilephoto.user.id===photo.user.id ? (
+                          <img className="profilephoto_feed" src={profilephoto.image_url} />
+                        ) : ("")}
+                        </>
+                      ))}
+                  </Card.Text>
                   <Card.Title as="div">
                     <strong>{photo.user.username}</strong>
                   </Card.Title>
