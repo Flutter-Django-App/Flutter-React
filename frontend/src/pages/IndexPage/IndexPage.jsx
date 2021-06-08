@@ -14,16 +14,17 @@ import { useHistory } from "react-router-dom";
 import LikeButton from "./../../components/LikeButton/LikeButton";
 import SaveButton from "./../../components/SaveButton/SaveButton";
 import CommentButton from "./../../components/CommentButton/CommentButton";
+import LikesModal from "./../../components/LikesModal/LikesModal";
 
 export default function IndexPage({ user, profilePhoto }) {
   const [allUsers, setAllUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [newComment, setNewComment] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = (e) => {
-    setShow(true);
-  };
+  // const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = (e) => {
+  //   setShow(true);
+  // };
   const [showLikes, setShowLikes] = useState(false);
   const handleCloseLikes = () => setShowLikes(false);
   const handleShowLikes = (e) => {
@@ -110,7 +111,7 @@ export default function IndexPage({ user, profilePhoto }) {
     }
     fetchAllUsers();
   }, []);
-
+  
   useEffect(() => {
     async function fetchPhotos() {
       const options = {
@@ -126,7 +127,7 @@ export default function IndexPage({ user, profilePhoto }) {
     }
     fetchPhotos();
   }, []);
-
+  
   const handleLike = async (e) => {
     const photo_id = e.target.value;
     e.preventDefault();
@@ -150,6 +151,7 @@ export default function IndexPage({ user, profilePhoto }) {
     }
     history.push("/");
   };
+  console.log(allUsers)
   return (
     <section className="index-pg ind-pg">
       <div className="ind-div">
@@ -198,37 +200,17 @@ export default function IndexPage({ user, profilePhoto }) {
                       </span>
                     </div>
                   </Card.Text>
-                  <Card.Text as="div">
-                    <div className="my-3" onClick={handleShow} class="myDIV">
-                      Likes: {photo.likes.length}
-                    </div>
-                  </Card.Text>
+                
+                  <LikesModal 
+                    key={photo.id}
+                    // show={show}
+                    // handleShow={handleShow}
+                    // handleClose={handleClose}
+                    photo={photo}
+                    allUsers={allUsers}
+                    profilePhoto={profilePhoto}
+                  />
 
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header>
-                      <Modal.Title>
-                        <strong>Likes</strong>
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <img src={photo.url} />
-
-                      {photo.likes.map((like) => (
-                        <span>
-                          <h2
-                            id="likedusers"
-                            className="user-name name name1 name-profile"
-                          >
-                            {
-                              allUsers.find(
-                                (element) => (element = `${like.user}`)
-                              ).username
-                            }
-                          </h2>
-                        </span>
-                      ))}
-                    </Modal.Body>
-                  </Modal>
                   <Card.Text as="div">
                     {photo.comments.map((comment) => (
                       <>
@@ -284,7 +266,7 @@ export default function IndexPage({ user, profilePhoto }) {
                                   <>
                                     <Button
                                       variant="contained"
-                                      onClick={handleClose}
+                                      onClick={handleCloseLikes}
                                     >
                                       Cancel
                                     </Button>
