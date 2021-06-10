@@ -25,7 +25,7 @@ export default function CommentButton({
   useEffect(() => {
     async function getCommentedPhotos() {
       if (!photo.comments.length) {
-        console.log("no comments");
+        return
       } else {
         photo.comments.map((like) =>
           like.user === user.id ? setIsCommented(true) : setIsCommented(false)
@@ -39,7 +39,6 @@ export default function CommentButton({
     <>
       {isCommented ? (
         <>
-          <Form onSubmit={handleSubmit}>
             <Button
               variant="contained"
               disabled={!newComment}
@@ -66,11 +65,9 @@ export default function CommentButton({
                 </svg>
               </a>
             </Button>
-          </Form>
         </>
       ) : (
         <>
-          <Form>
             <Button
               variant="contained"
               disabled={!newComment}
@@ -97,7 +94,6 @@ export default function CommentButton({
                 </svg>
               </a>
             </Button>
-          </Form>
         </>
       )}
     </>

@@ -26,7 +26,7 @@ export default function App() {
   );
   const [user, setUser] = useState([]);
   const history = useHistory();
-  const [profilePhoto, setProfilePhoto] = useState("Add a Profile Picure!");
+  const [profilePhoto, setProfilePhoto] = useState([]);
 
   useEffect(() => {
     async function fetchUser() {
@@ -141,11 +141,11 @@ export default function App() {
           {!logged_in ? (
             <LoginForm handle_login={handle_login} />
           ) : (
-            <IndexPage logged_in={logged_in} user={user} />
+            <IndexPage logged_in={logged_in} user={user} profilePhoto={profilePhoto} />
           )}
         </Route>
         <Route exact path="/photos">
-          <IndexPage logged_in={logged_in} user={user} />
+          <IndexPage logged_in={logged_in} user={user} profilePhoto={profilePhoto} />
         </Route>
         <Route exact path="/photos/create">
           <AddPhotoPage logged_in={logged_in} user={user} />
@@ -162,10 +162,11 @@ export default function App() {
             logged_in={logged_in}
             user={user}
             setUser={setUser}
+            profilePhoto={profilePhoto}
           />
         </Route>
         <Route exact path="/profile/photo">
-          <AddProfilePhotoPage logged_in={logged_in} user={user} />
+          <AddProfilePhotoPage logged_in={logged_in} user={user} profilePhoto={profilePhoto} />
         </Route>
         <Route exact path="/signup">
           <SignUpForm handle_signup={handle_signup} />

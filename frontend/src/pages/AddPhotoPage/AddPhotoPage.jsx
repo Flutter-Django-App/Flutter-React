@@ -129,9 +129,11 @@ export default function AddPhotoPage({ user }) {
           />
         </FormGroup>
         <FormGroup>
-          <Button type="submit">
+
+          <Button type="submit" onChange={handleChange}>
             Add Photo
           </Button>{" "}
+          {/* is the onChange needed here? */}
         </FormGroup>
       </Form>
     </div>

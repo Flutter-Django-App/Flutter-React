@@ -17,7 +17,7 @@ export default function SaveButton({ user, photo_id, photo }) {
   useEffect(() => {
     async function getSavedPhotos() {
       if (!photo.likes.length) {
-        console.log("no likes");
+        return
       } else {
         photo.likes.map((like) =>
           like.user === user.id ? setIsSaved(true) : setIsSaved(false)
@@ -54,7 +54,6 @@ export default function SaveButton({ user, photo_id, photo }) {
     <>
       {isSaved ? (
         <>
-          <Form onSubmit={handleSave}>
             <Button
               variant="contained"
               type="submit"
@@ -75,11 +74,9 @@ export default function SaveButton({ user, photo_id, photo }) {
                 </svg>
               </a>
             </Button>
-          </Form>
         </>
       ) : (
         <>
-          <Form>
             <Button
               variant="contained"
               type="submit"
@@ -100,7 +97,6 @@ export default function SaveButton({ user, photo_id, photo }) {
                 </svg>
               </a>
             </Button>
-          </Form>
         </>
       )}
     </>

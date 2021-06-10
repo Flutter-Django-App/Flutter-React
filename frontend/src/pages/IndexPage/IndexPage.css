@@ -23,11 +23,11 @@ div {
     position: relative;
 }
 
-@media (min-width: 640px);
+@media (min-width: 640px){
 .index-pg {
         /* padding-top: 30px; */
 }
-
+}
 
 .ind-pg {
     -webkit-box-flex: 1;
@@ -65,4 +65,15 @@ div {
 #likedusers {
     margin: 10px;
     align-items: center;
+}
+
+.profilephoto_feed {
+    margin-bottom: 50px;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    display: block;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
 }
